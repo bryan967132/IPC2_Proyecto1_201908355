@@ -1,4 +1,4 @@
-# -IPC2-1S-2021
+# IPC2-1S-2022
 ## Comandos de GitHub
 | Comando | Descripcion	|
 |---------|-------------|
