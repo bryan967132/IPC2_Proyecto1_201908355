@@ -33,6 +33,6 @@ class list_e_pis:
                 "Columnas:",actual.piso_Artesanal.columnas,
                 "Costo por voltear:",actual.piso_Artesanal.cVolt,
                 "Costo por intercambiar:",actual.piso_Artesanal.cInt)
-            actual.piso_Artesanal.patrones.recorrer()
-            
+            actual.piso_Artesanal.patrones.recorrer()            
+            print()
             actual = actual.siguiente

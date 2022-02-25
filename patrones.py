@@ -24,6 +24,6 @@ class list_e_pat:
     def recorrer(self):
         actual = self.primero
         while actual is not None:
-            print("\tCodigo:",actual.piso_patron.codigo,
-                "\tPatron:",actual.piso_patron.patron)
+            print("\tCodigo:",actual.piso_patron.codigo)
+            actual.piso_patron.patron.recorrer()
             actual = actual.siguiente
