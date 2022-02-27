@@ -71,7 +71,16 @@ class list_e_pis:
         print("El piso no tiene las mismas dimensiones que el primero")
         return True
     
-    def buscarPatron(self,nombre,codigo):
+    def buscarPatronP(self,nombre,codigo):
+        actual = self.primero
+        while actual and actual.piso_Artesanal.nombre != nombre:
+            actual = actual.siguiente
+        return actual.piso_Artesanal.patrones.buscar(codigo)
+
+    def buscarPatronS(self,nombre1,codigo1,nombre,codigo):
+        if nombre == nombre1 and codigo == codigo1:
+            print("El nombre y código del segundo son los mismos que el primero")
+            return True
         actual = self.primero
         while actual and actual.piso_Artesanal.nombre != nombre:
             actual = actual.siguiente
