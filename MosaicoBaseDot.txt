@@ -1,0 +1,26 @@
+digraph {
+	graph [pad="0.5", nodesep="0.5", ranksep="2"];
+	node [shape=plain]
+	rankdir=LR;
+	Foo [
+		label=<
+			<table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+				<tr>
+					<td port="1" bgcolor = "white"></td>
+					<td port="2" bgcolor = "black"></td>
+					<td port="3" bgcolor = "black"></td>
+				</tr>
+				<tr>
+					<td port="4" bgcolor = "black"></td>
+					<td port="5" bgcolor = "white"></td>
+					<td port="6" bgcolor = "black"></td>
+				</tr>
+				<tr>
+					<td port="7" bgcolor = "white"></td>
+					<td port="8" bgcolor = "white"></td>
+					<td port="9" bgcolor = "white"></td>
+				</tr>
+			</table>
+		>
+	];
+}
