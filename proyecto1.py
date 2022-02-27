@@ -1,3 +1,26 @@
-from menu import menu
-m = menu()
-m.menuP()
+#from menu import menu
+#m = menu()
+#m.menuP()
+
+from parseXML import parseXML
+from otrasF import oFunc
+from princF import pFunc
+
+lista_piso = parseXML().getXML('entrada.xml')
+
+piso1 = "ejemplo02"
+ptrn1 = "cod21"
+f = lista_piso.getF(piso1)
+c = lista_piso.getC(piso1)
+piso2 = "ejemplo02"
+ptrn2 = "cod22"
+mosaico1 = lista_piso.getMos(piso1,ptrn1)
+mosaico2 = lista_piso.getMos(piso2,ptrn2)
+
+o = oFunc()
+o.printMos(f,c,mosaico1)
+o.printMos(f,c,mosaico2)
+
+d = pFunc()
+pares = d.getCantCol(f,c,mosaico1,mosaico2)
+o.printPar(pares)
