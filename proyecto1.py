@@ -1,48 +1,29 @@
-from xml.dom import minidom
-from pisos import list_e_pis,piso_Artesanal
-from patrones import list_e_pat,piso_Patron
-from patron import list_e_pc,patron_C
-#import xml.etree.ElementTree as ET
-myDoc = minidom.parse('./entrada.xml')
-pisosArtesanales = myDoc.getElementsByTagName('piso')
+#from menu import menu
+#m = menu()
+#m.menuP()
 
-lista_piso = list_e_pis()
+from parseXML import parseXML
+lista_piso = parseXML().getXML('entrada.xml')
 
-for piso in pisosArtesanales:
-    nom = piso.attributes['nombre'].value.replace(" ","").replace("\n","")
-    r = int(piso.getElementsByTagName('R')[0].firstChild.data.replace(" ","").replace("\n",""))
-    c = int(piso.getElementsByTagName('C')[0].firstChild.data.replace(" ","").replace("\n",""))
-    f = float(piso.getElementsByTagName('F')[0].firstChild.data.replace(" ","").replace("\n",""))
-    s = float(piso.getElementsByTagName('S')[0].firstChild.data.replace(" ","").replace("\n",""))
+piso1 = "ejemplo02"
+ptrn1 = "cod21"
+piso2 = "ejemplo02"
+ptrn2 = "cod22"
+patron1 = lista_piso.getMos(piso1,ptrn1)
+patron2 = lista_piso.getMos(piso2,ptrn2)
+f = lista_piso.getF(piso1)
+c = lista_piso.getC(piso1)
 
-    patrones = piso.getElementsByTagName('patron')
+mos1 = ""
+for i in range(f):
+    for j in range(c):
+        mos1 += str(patron1.get(i,j)) + " "
+    mos1 += "\n"
+print(mos1)
 
-    lista_patron = list_e_pat()
-
-    for patron in patrones:
-        codigP = patron.attributes['codigo'].value.replace(" ","").replace("\n","")
-        patPat = patron.firstChild.data.replace(" ","").replace("\n","")
-
-        lista_color = list_e_pc()
-        x = 1
-        y = 1
-        for color in patPat:
-            nuevoColor = patron_C(x,y,color)
-            lista_color.insertar(nuevoColor)
-            if x == c:
-                x = 0
-                y += 1
-            x += 1
-
-        nuevoPatron = piso_Patron(codigP,lista_color)
-        lista_patron.insertar(nuevoPatron)
-
-    nuevoPiso = piso_Artesanal(nom,r,c,f,s,lista_patron)
-    lista_piso.insertar(nuevoPiso)
-
-lista_piso.recorrer()
-
-#for piso in pisosArtesanales:
-#    print("Piso:",piso.attrib['nombre'])
-#    for campos in piso:
-#        print(campos.text)
+mos2 = ""
+for i in range(f):
+    for j in range(c):
+        mos2 += str(patron2.get(i,j)) + " "
+    mos2 += "\n"
+print(mos2)

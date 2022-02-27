@@ -36,3 +36,50 @@ class list_e_pis:
             actual.piso_Artesanal.patrones.recorrer()            
             print()
             actual = actual.siguiente
+
+    def getF(self,nombre):
+        actual = self.primero
+        while actual and actual.piso_Artesanal.nombre != nombre:
+            actual = actual.siguiente
+        return actual.piso_Artesanal.filas
+    
+    def getC(self,nombre):
+        actual = self.primero
+        while actual and actual.piso_Artesanal.nombre != nombre:
+            actual = actual.siguiente
+        return actual.piso_Artesanal.columnas
+
+    def buscarP(self,nombre):
+        actual = self.primero
+        while actual and actual.piso_Artesanal.nombre != nombre:
+            if actual.siguiente is None:
+                print("El piso no existe en el sistema")
+                return True
+            actual = actual.siguiente
+        return False
+    
+    def buscarS(self,filas,columnas,nomS):
+        actual = self.primero
+        while actual and actual.piso_Artesanal.nombre != nomS:
+            if actual.siguiente is None:
+                print("El piso no existe en el sistema")
+                return True
+            actual = actual.siguiente
+            
+        if actual.piso_Artesanal.filas == filas and actual.piso_Artesanal.columnas == columnas:
+            return False
+        print("El piso no tiene las mismas dimensiones que el primero")
+        return True
+    
+    def buscarPatron(self,nombre,codigo):
+        actual = self.primero
+        while actual and actual.piso_Artesanal.nombre != nombre:
+            actual = actual.siguiente
+        return actual.piso_Artesanal.patrones.buscar(codigo)
+
+
+    def getMos(self,nombre,codigo):
+        actual = self.primero
+        while actual and actual.piso_Artesanal.nombre != nombre:
+            actual = actual.siguiente
+        return actual.piso_Artesanal.patrones.getPatron(codigo)
