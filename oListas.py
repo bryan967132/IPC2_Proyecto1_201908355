@@ -49,6 +49,18 @@ class listaCant2:
             actual = actual.siguiente
         actual.siguiente = nodo(objeto = cants)
     
+    def get(self,i):
+        listaSimple = listaCant1()
+        actual = self.primero
+        while actual:
+            if actual.objeto.i == i:
+                p = cant1(actual.objeto.j,actual.objeto.cantC)
+                listaSimple.insertar(p)
+            if actual.siguiente is None:
+                break
+            actual = actual.siguiente
+        return listaSimple
+    
     def get(self,i,j):
         actual = self.primero
         while actual:

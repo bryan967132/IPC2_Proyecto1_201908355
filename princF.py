@@ -112,26 +112,26 @@ class pFunc:
             i += 1
         return preOpt
 
-    def cantDescart(self,cantNoMover,t,preOpt,rutas):
+    def cantDescart(self,lenPreOpt,t,preOpt,rutas):
         cant = 0
         i = 0
-        while i < cantNoMover:
+        while i < lenPreOpt:
             x = 0
             while x < t:
-                if (preOpt.get(i,0) == rutas.get(x,0) and preOpt.get(i,1) == rutas.get(x,1)) or (preOpt.get(i,0) == rutas.get(x,2) and preOpt.get(i,0) == rutas.get(x,3)):
+                if (preOpt.get(i,0) == rutas.get(x,0) and preOpt.get(i,1) == rutas.get(x,1)) or (preOpt.get(i,0) == rutas.get(x,2) and preOpt.get(i,1) == rutas.get(x,3)):
                     cant += 1
                 x += 1
             i += 1
         return cant
 
-    def getDescart(self,cantNoMover,t,preOpt,rutas):
+    def getDescart(self,lenPreOpt,t,preOpt,rutas):
         rep = listaCant2()
         cant = 0
         i = 0
-        while i < cantNoMover:
+        while i < lenPreOpt:
             x = 0
             while x < t:
-                if (preOpt.get(i,0) == rutas.get(x,0) and preOpt.get(i,1) == rutas.get(x,1)) or (preOpt.get(i,0) == rutas.get(x,2) and preOpt.get(i,0) == rutas.get(x,3)):
+                if (preOpt.get(i,0) == rutas.get(x,0) and preOpt.get(i,1) == rutas.get(x,1)) or (preOpt.get(i,0) == rutas.get(x,2) and preOpt.get(i,1) == rutas.get(x,3)):
                     rutasx0 = cant2(cant,0,rutas.get(x,0));rutasx1 = cant2(cant,1,rutas.get(x,1))
                     rutasx2 = cant2(cant,2,rutas.get(x,2));rutasx3 = cant2(cant,3,rutas.get(x,3))
                     rutasx4 = cant2(cant,4,rutas.get(x,4));rutasx5 = cant2(cant,5,rutas.get(x,5))
@@ -142,12 +142,69 @@ class pFunc:
             i += 1
         return rep
 
+    def cantOptIn(self,t,lenRep,rutas,rep):
+        cant = 0
+        i = 0
+        while i < t:
+            if self.insertar(lenRep,rep,rutas.get(i,0),rutas.get(i,1),rutas.get(i,2),rutas.get(i,3),rutas.get(i,4),rutas.get(i,5)):
+                cant += 1
+            i += 1
+        return cant
+
+    def insertar(self,lenRep,rep,ruta0,ruta1,ruta2,ruta3,ruta4,ruta5):
+        i = 0
+        while i < lenRep:
+            if rep.get(i,0) == ruta0 and rep.get(i,1) == ruta1 and rep.get(i,2) == ruta2 and rep.get(i,3) == ruta3 and rep.get(i,4) == ruta4 and rep.get(i,5) == ruta5:
+                return False
+            i += 1
+        return True
+    
+    def getOpt(self,t,lenRep,rutas,rep):
+        opt = listaCant2()
+        cant = 0
+        i = 0
+        while i < t:
+            if self.insertar(lenRep,rep,rutas.get(i,0),rutas.get(i,1),rutas.get(i,2),rutas.get(i,3),rutas.get(i,4),rutas.get(i,5)):
+                rutasi0 = cant2(cant,0,rutas.get(i,0));rutasi1 = cant2(cant,1,rutas.get(i,1))
+                rutasi2 = cant2(cant,2,rutas.get(i,2));rutasi3 = cant2(cant,3,rutas.get(i,3))
+                rutasi4 = cant2(cant,4,rutas.get(i,4));rutasi5 = cant2(cant,5,rutas.get(i,5))
+                opt.insertar(rutasi0);opt.insertar(rutasi1);opt.insertar(rutasi2)
+                opt.insertar(rutasi3);opt.insertar(rutasi4);opt.insertar(rutasi5)
+                cant += 1
+            i += 1
+        return opt
+    
+    def cantOpt(self,t,rutas):
+        lenPreOpt = self.cantNoMover(t,rutas)
+        if lenPreOpt > 0:
+            preOpt = self.getNoMover(t,rutas)
+            lenRep = self.cantDescart(lenPreOpt,t,preOpt,rutas)
+            rep = self.getDescart(lenRep,t,preOpt,rutas)
+            cantOpt = self.cantOptIn(t,lenRep,rutas,rep)
+            return cantOpt
+        else:
+            return t
 
     def optRutas(self,t,rutas):
-        cantNoMover = self.cantNoMover(t,rutas)
-        if cantNoMover > 0:
+        lenPreOpt = self.cantNoMover(t,rutas)
+        if lenPreOpt > 0:
             preOpt = self.getNoMover(t,rutas)
-            cantDescart = self.cantDescart(cantNoMover,t,preOpt,rutas)
-            rep = self.getDescart(cantDescart,t,preOpt,rutas)
+            lenRep = self.cantDescart(lenPreOpt,t,preOpt,rutas)
+            rep = self.getDescart(lenRep,t,preOpt,rutas)
+            opt = self.getOpt(t,lenRep,rutas,rep)
+            return opt
         else:
             return rutas
+    
+    def cantFalts(self,mosaico1,lencrd2,crd2,color):
+        cant = 0
+        i = 0
+        while i < lencrd2:
+            if mosaico1.get(crd2.get(i,0),crd2.get(i,1)) is not color:
+                cant += 1
+        return cant
+    
+    def crearCaminos(self,f,c,mosaico1,lenRutas,rutas,lencrd2,crd2,color):
+        lenFalts = self.cantFalts(mosaico1,lencrd2,crd2,color)
+        print(lenFalts)
+        #falts = self.getFalts()
