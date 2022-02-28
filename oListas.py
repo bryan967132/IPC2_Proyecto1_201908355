@@ -69,3 +69,33 @@ class listaCant2:
             if actual.siguiente is None:
                 return
             actual = actual.siguiente
+
+    def intercambiar(self,i0,j0,i1,j1):
+        actual1 = self.primero
+        primero = None
+        while actual1:
+            if actual1.objeto.i == i0 and actual1.objeto.j == j0:
+                primero = actual1
+                break
+            actual1 = actual1.siguiente
+        
+        actual2 = self.primero
+        segundo = None
+        while actual2:
+            if actual2.objeto.i == i1 and actual2.objeto.j == j1:
+                segundo = actual2
+                break
+            actual2 = actual2.siguiente
+
+        primero.objeto.i = i1
+        primero.objeto.j = j1
+        segundo.objeto.i = i0
+        segundo.objeto.j = j0
+    
+    def descartar(self,i,j):
+        actual = self.primero
+        while actual:
+            if actual.objeto.i == i and actual.objeto.j == j:
+                actual.objeto.cantC = - 1
+                break
+            actual = actual.siguiente

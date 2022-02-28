@@ -196,15 +196,87 @@ class pFunc:
         else:
             return rutas
     
-    def cantFalts(self,mosaico1,lencrd2,crd2,color):
+    def cantFalts(self,mosaico1,lenCrd2,crd2,color):
         cant = 0
         i = 0
-        while i < lencrd2:
-            if mosaico1.get(crd2.get(i,0),crd2.get(i,1)) is not color:
+        while i < lenCrd2:
+            if mosaico1.get(crd2.get(i,0),crd2.get(i,1)) != color:
                 cant += 1
+            i += 1
         return cant
     
-    def crearCaminos(self,f,c,mosaico1,lenRutas,rutas,lencrd2,crd2,color):
-        lenFalts = self.cantFalts(mosaico1,lencrd2,crd2,color)
-        print(lenFalts)
-        #falts = self.getFalts()
+    def getFalts(self,mosaico1,lenCrd2,crd2,color):
+        faltantes = listaCant2()
+        falt = 0
+        i = 0
+        while i < lenCrd2:
+            if mosaico1.get(crd2.get(i,0),crd2.get(i,1)) != color:
+                crd2i0 = cant2(falt,0,crd2.get(i,0));crd2i1 = cant2(falt,1,crd2.get(i,1))
+                faltantes.insertar(crd2i0)
+                faltantes.insertar(crd2i1)
+                falt += 1
+            i += 1
+        return faltantes
+    
+    def getMinRutas(self,lenRutas,rutas):
+        i = 0
+        while i < lenRutas - 1:
+            x = 0
+            while x < lenRutas - i - 1:
+                movActual = abs(rutas.get(x,4)) + abs(rutas.get(x,5))
+                movSiguiente = abs(rutas.get(x + 1,4)) + abs(rutas.get(x + 1,5))
+                if movActual > movSiguiente:
+                    rutas.intercambiar(x,0,x + 1,0)
+                    rutas.intercambiar(x,1,x + 1,1)
+                    rutas.intercambiar(x,2,x + 1,2)
+                    rutas.intercambiar(x,3,x + 1,3)
+                    rutas.intercambiar(x,4,x + 1,4)
+                    rutas.intercambiar(x,5,x + 1,5)
+                x += 1
+            i += 1
+        return rutas
+    
+    def dscrtRutas(self,lenRutas,rutas,punto0,punto1,falts0,falts1):
+        x = 0
+        while x < lenRutas:
+            if (rutas.get(x,0) == punto0 and rutas.get(x,1) == punto1) or (rutas.get(x,2) == falts0 and rutas.get(x,3) == falts1):
+                rutas.descartar(x,0);rutas.descartar(x,1);rutas.descartar(x,2)
+                rutas.descartar(x,3);rutas.descartar(x,4);rutas.descartar(x,5)
+            x += 1
+        
+        return rutas
+
+    def getOptC(self,lenRutas,lenFalts,rutas,falts):
+        optimo = listaCant2()
+        c = 0
+        rutas = self.getMinRutas(lenRutas,rutas)
+        i = 0
+        while i < lenFalts:
+            punto0 = None
+            punto1 = None
+            x = 0
+            while x < lenRutas:
+                if rutas.get(x,2) != - 1 and rutas.get(x,3) != - 1 and rutas.get(x,2) == falts.get(i,0) and rutas.get(x,3) == falts.get(i,1):
+                    rutasx0 = cant2(c,0,rutas.get(x,0));rutasx1 = cant2(c,1,rutas.get(x,1));rutasx2 = cant2(c,2,rutas.get(x,2))
+                    rutasx3 = cant2(c,3,rutas.get(x,3));rutasx4 = cant2(c,4,rutas.get(x,4));rutasx5 = cant2(c,5,rutas.get(x,5))
+                    optimo.insertar(rutasx0);optimo.insertar(rutasx1);optimo.insertar(rutasx2)
+                    optimo.insertar(rutasx3);optimo.insertar(rutasx4);optimo.insertar(rutasx5)
+                    punto0 = rutas.get(x,0)
+                    punto1 = rutas.get(x,1)
+                    c += 1
+                    break
+                x += 1
+            if punto0 is not None and punto1 is not None:
+                rutas = self.dscrtRutas(lenRutas,rutas,punto0,punto1,falts.get(i,0),falts.get(i,1))
+                rutas = self.getMinRutas(lenRutas,rutas)
+            i += 1
+        return optimo
+    
+    def optCmns(self,mosaico1,lenCrd2,crd2,color):
+        return self.cantFalts(mosaico1,lenCrd2,crd2,color)
+    
+    def crearCaminos(self,mosaico1,lenRutas,rutas,lenCrd2,crd2,color):
+        lenFalts = self.cantFalts(mosaico1,lenCrd2,crd2,color)
+        falts = self.getFalts(mosaico1,lenCrd2,crd2,color)
+        falts = self.getOptC(lenRutas,lenFalts,rutas,falts)
+        return falts
