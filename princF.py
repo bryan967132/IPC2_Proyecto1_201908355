@@ -1,3 +1,4 @@
+from patron import list_e_pc,patron_C
 from oListas import cant1,cant2,listaCant1,listaCant2
 from otrasF import oFunc
 class pFunc:
@@ -320,6 +321,7 @@ class pFunc:
                                 if self.verificar(f,c + mover,mosFin,color):
                                     break
                                 c += mover
+                                m += 1
                         if abs(rutas.get(i,5)) != 0:
                             m = 1
                             while m <= abs(rutas.get(i,5)):
@@ -330,6 +332,7 @@ class pFunc:
                                 if self.verificar(f + mover,c,mosFin,color):
                                     break
                                 f += mover
+                                m += 1
                         parar = True
                         break
                     y += 1
@@ -340,74 +343,12 @@ class pFunc:
         return movs
         
     def getVoltT(self,fil,col,lenRutas,rutas,mosIni,mosFin,color):
-        tmpMos = listaCant2()
+        tmpMos = list_e_pc()
         i = 0
         while i < fil:
             j = 0
             while j < col:
-                tmpCol = cant2(i,j,mosIni.get(i,j))
-                tmpMos.insertar(tmpCol)
-                j += 1
-            i += 1
-        i = 0
-        while i < lenRutas:
-            x = 0
-            while x < fil:
-                parar = False
-                y = 0
-                while y < col:
-                    f = 0
-                    c = 0
-                    if x == rutas.get(i,0) and y == rutas.get(i,1):
-                        f = x
-                        c = y
-                        if abs(rutas.get(i,4)) != 0:
-                            m = 1
-                            while m <= abs(rutas.get(i,4)):
-                                mover = 1
-                                if rutas.get(i,4) < 0:
-                                    mover = -1
-                                if self.verificar(f,c + mover,mosFin,color):
-                                    break
-                                c += mover
-                        if abs(rutas.get(i,5)) != 0:
-                            m = 1
-                            while m <= abs(rutas.get(i,5)):
-                                mover = 1
-                                if rutas.get(i,5) < 0:
-                                    mover = -1
-                                if self.verificar(f + mover,c,mosFin,color):
-                                    break
-                                f += mover
-                        parar = True
-                        break
-                    y += 1
-                if parar:
-                    break
-                x += 1
-            i += 1
-        volteos = 0
-        i = 0
-        while i < f:
-            j = 0
-            while j < c:
-                if tmpMos.get(i,j) != mosFin.get(i,j):
-                    volteos += 1
-                j += 1
-            i += 1
-        return volteos
-    
-    def minCost(self,intercambios,volteos,costInt,costVolt):
-        return intercambios * costInt + volteos * costVolt
-
-    def transMos(self,fil,col,lenRutas,rutas,mosIni,mosFin,color):
-        p = oFunc()
-        tmpMos = listaCant2()
-        i = 0
-        while i < fil:
-            j = 0
-            while j < col:
-                tmpCol = cant2(i,j,mosIni.get(i,j))
+                tmpCol = patron_C(i,j,mosIni.get(i,j))
                 tmpMos.insertar(tmpCol)
                 j += 1
             i += 1
@@ -430,10 +371,10 @@ class pFunc:
                                 if rutas.get(i,4) < 0:
                                     mover = -1
                                 tmpMos.intercambiar(f,c,f,c + mover)
-                                p.printMos(fil,col,tmpMos)
                                 if self.verificar(f,c + mover,mosFin,color):
                                     break
                                 c += mover
+                                m += 1
                         if abs(rutas.get(i,5)) != 0:
                             m = 1
                             while m <= abs(rutas.get(i,5)):
@@ -441,10 +382,89 @@ class pFunc:
                                 if rutas.get(i,5) < 0:
                                     mover = -1
                                 tmpMos.intercambiar(f,c,f + mover,c)
-                                p.printMos(fil,col,tmpMos)
                                 if self.verificar(f + mover,c,mosFin,color):
                                     break
                                 f += mover
+                                m += 1
+                        parar = True
+                        break
+                    y += 1
+                if parar:
+                    break
+                x += 1
+            i += 1
+        volteos = 0
+        i = 0
+        while i < fil:
+            j = 0
+            while j < col:
+                if tmpMos.get(i,j) != mosFin.get(i,j):
+                    volteos += 1
+                j += 1
+            i += 1
+        return volteos
+    
+    def minCost(self,intercambios,volteos,costInt,costVolt):
+        return intercambios * costInt + volteos * costVolt
+
+    def transMos(self,fil,col,lenRutas,rutas,mosIni,mosFin,color,cInt,cVolt):
+        p = oFunc()
+        tmpMos = list_e_pc()
+        i = 0
+        while i < fil:
+            j = 0
+            while j < col:
+                tmpCol = patron_C(i,j,mosIni.get(i,j))
+                tmpMos.insertar(tmpCol)
+                j += 1
+            i += 1
+        i = 0
+        paso = 1
+        while i < lenRutas:
+            x = 0
+            while x < fil:
+                parar = False
+                y = 0
+                while y < col:
+                    f = 0
+                    c = 0
+                    if x == rutas.get(i,0) and y == rutas.get(i,1):
+                        f = x
+                        c = y
+                        if abs(rutas.get(i,4)) != 0:
+                            m = 1
+                            while m <= abs(rutas.get(i,4)):
+                                mover = 0
+                                if rutas.get(i,4) < 0:
+                                    print(str(paso) + ')','Se intercambió. Costo: Q',cInt)
+                                    mover = -1
+                                else:
+                                    print(str(paso) + ')','Se intercambió. Costo: Q',cInt)
+                                    mover = 1
+                                tmpMos.intercambiar(f,c,f,c + mover)
+                                p.printMos(fil,col,tmpMos)
+                                paso += 1
+                                if self.verificar(f,c + mover,mosFin,color):
+                                    break
+                                c += mover
+                                m += 1
+                        if abs(rutas.get(i,5)) != 0:
+                            m = 1
+                            while m <= abs(rutas.get(i,5)):
+                                mover = 0
+                                if rutas.get(i,5) < 0:
+                                    print(str(paso) + ')','Se intercambió. Costo: Q',cInt)
+                                    mover = -1
+                                else:
+                                    print(str(paso) + ')','Se intercambió. Costo: Q',cInt)
+                                    mover = 1
+                                tmpMos.intercambiar(f,c,f + mover,c)
+                                p.printMos(fil,col,tmpMos)
+                                paso += 1
+                                if self.verificar(f + mover,c,mosFin,color):
+                                    break
+                                f += mover
+                                m += 1
                         parar = True
                         break
                     y += 1
@@ -457,6 +477,7 @@ class pFunc:
             j = 0
             while j < col:
                 if tmpMos.get(i,j) != mosFin.get(i,j):
+                    print(str(paso) + ')','Se volteó. Costo: Q',cVolt)
                     tmpMos.voltear(i,j)
                     p.printMos(fil,col,tmpMos)
                 j += 1

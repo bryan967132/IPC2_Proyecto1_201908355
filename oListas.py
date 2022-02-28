@@ -99,14 +99,3 @@ class listaCant2:
                 actual.objeto.cantC = - 1
                 break
             actual = actual.siguiente
-    
-    def voltear(self,i,j):
-        actual = self.primero
-        while actual:
-            if actual.objeto.i == i and actual.objeto.j == j:
-                if actual.objeto.cantC == 'B':
-                    actual.objeto.cantC = 'W'
-                else:
-                    actual.objeto.cantC = 'B'
-                break
-            actual = actual.siguiente

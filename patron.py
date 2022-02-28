@@ -59,3 +59,14 @@ class list_e_pc:
         primero.patron_C.j = j2
         segundo.patron_C.i = i1
         segundo.patron_C.j = j1
+    
+    def voltear(self,i,j):
+        actual = self.primero
+        while actual:
+            if actual.patron_C.i == i and actual.patron_C.j == j:
+                if actual.patron_C.color == 'B':
+                    actual.patron_C.color = 'W'
+                else:
+                    actual.patron_C.color = 'B'
+                break
+            actual = actual.siguiente
