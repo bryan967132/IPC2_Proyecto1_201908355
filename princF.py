@@ -1,4 +1,5 @@
 from oListas import cant1,cant2,listaCant1,listaCant2
+from otrasF import oFunc
 class pFunc:
     def getCantCol(self,f,c,mosaico1,mosaico2):
         w1 = 0
@@ -280,3 +281,183 @@ class pFunc:
         falts = self.getFalts(mosaico1,lenCrd2,crd2,color)
         falts = self.getOptC(lenRutas,lenFalts,rutas,falts)
         return falts
+    
+    def verificar(self,i,j,mosaico,color):
+        if mosaico.get(i,j) == color:
+            return True
+        return False
+
+    def getMovT(self,fil,col,lenRutas,rutas,mosIni,mosFin,color):
+        movs = 0
+        tmpMos = listaCant2()
+        i = 0
+        while i < fil:
+            j = 0
+            while j < col:
+                tmpCol = cant2(i,j,mosIni.get(i,j))
+                tmpMos.insertar(tmpCol)
+                j += 1
+            i += 1
+        i = 0
+        while i < lenRutas:
+            x = 0
+            while x < fil:
+                parar = False
+                y = 0
+                while y < col:
+                    f = 0
+                    c = 0
+                    if x == rutas.get(i,0) and y == rutas.get(i,1):
+                        f = x
+                        c = y
+                        if abs(rutas.get(i,4)) != 0:
+                            m = 1
+                            while m <= abs(rutas.get(i,4)):
+                                mover = 1
+                                if rutas.get(i,4) < 0:
+                                    mover = -1
+                                movs += 1
+                                if self.verificar(f,c + mover,mosFin,color):
+                                    break
+                                c += mover
+                        if abs(rutas.get(i,5)) != 0:
+                            m = 1
+                            while m <= abs(rutas.get(i,5)):
+                                mover = 1
+                                if rutas.get(i,5) < 0:
+                                    mover = -1
+                                movs += 1
+                                if self.verificar(f + mover,c,mosFin,color):
+                                    break
+                                f += mover
+                        parar = True
+                        break
+                    y += 1
+                if parar:
+                    break
+                x += 1
+            i += 1
+        return movs
+        
+    def getVoltT(self,fil,col,lenRutas,rutas,mosIni,mosFin,color):
+        tmpMos = listaCant2()
+        i = 0
+        while i < fil:
+            j = 0
+            while j < col:
+                tmpCol = cant2(i,j,mosIni.get(i,j))
+                tmpMos.insertar(tmpCol)
+                j += 1
+            i += 1
+        i = 0
+        while i < lenRutas:
+            x = 0
+            while x < fil:
+                parar = False
+                y = 0
+                while y < col:
+                    f = 0
+                    c = 0
+                    if x == rutas.get(i,0) and y == rutas.get(i,1):
+                        f = x
+                        c = y
+                        if abs(rutas.get(i,4)) != 0:
+                            m = 1
+                            while m <= abs(rutas.get(i,4)):
+                                mover = 1
+                                if rutas.get(i,4) < 0:
+                                    mover = -1
+                                if self.verificar(f,c + mover,mosFin,color):
+                                    break
+                                c += mover
+                        if abs(rutas.get(i,5)) != 0:
+                            m = 1
+                            while m <= abs(rutas.get(i,5)):
+                                mover = 1
+                                if rutas.get(i,5) < 0:
+                                    mover = -1
+                                if self.verificar(f + mover,c,mosFin,color):
+                                    break
+                                f += mover
+                        parar = True
+                        break
+                    y += 1
+                if parar:
+                    break
+                x += 1
+            i += 1
+        volteos = 0
+        i = 0
+        while i < f:
+            j = 0
+            while j < c:
+                if tmpMos.get(i,j) != mosFin.get(i,j):
+                    volteos += 1
+                j += 1
+            i += 1
+        return volteos
+    
+    def minCost(self,intercambios,volteos,costInt,costVolt):
+        return intercambios * costInt + volteos * costVolt
+
+    def transMos(self,fil,col,lenRutas,rutas,mosIni,mosFin,color):
+        p = oFunc()
+        tmpMos = listaCant2()
+        i = 0
+        while i < fil:
+            j = 0
+            while j < col:
+                tmpCol = cant2(i,j,mosIni.get(i,j))
+                tmpMos.insertar(tmpCol)
+                j += 1
+            i += 1
+        i = 0
+        while i < lenRutas:
+            x = 0
+            while x < fil:
+                parar = False
+                y = 0
+                while y < col:
+                    f = 0
+                    c = 0
+                    if x == rutas.get(i,0) and y == rutas.get(i,1):
+                        f = x
+                        c = y
+                        if abs(rutas.get(i,4)) != 0:
+                            m = 1
+                            while m <= abs(rutas.get(i,4)):
+                                mover = 1
+                                if rutas.get(i,4) < 0:
+                                    mover = -1
+                                tmpMos.intercambiar(f,c,f,c + mover)
+                                p.printMos(fil,col,tmpMos)
+                                if self.verificar(f,c + mover,mosFin,color):
+                                    break
+                                c += mover
+                        if abs(rutas.get(i,5)) != 0:
+                            m = 1
+                            while m <= abs(rutas.get(i,5)):
+                                mover = 1
+                                if rutas.get(i,5) < 0:
+                                    mover = -1
+                                tmpMos.intercambiar(f,c,f + mover,c)
+                                p.printMos(fil,col,tmpMos)
+                                if self.verificar(f + mover,c,mosFin,color):
+                                    break
+                                f += mover
+                        parar = True
+                        break
+                    y += 1
+                if parar:
+                    break
+                x += 1
+            i += 1
+        i = 0
+        while i < fil:
+            j = 0
+            while j < col:
+                if tmpMos.get(i,j) != mosFin.get(i,j):
+                    tmpMos.voltear(i,j)
+                    p.printMos(fil,col,tmpMos)
+                j += 1
+            i += 1

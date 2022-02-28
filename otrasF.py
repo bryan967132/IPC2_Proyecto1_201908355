@@ -21,7 +21,7 @@ class oFunc:
             print(crd.get(i,0),',',crd.get(i,1))
 
     def printRutas(self,t,rutas):
-        print()
         for i in range(t):
-            print(rutas.get(i,0),',',rutas.get(i,1),' -> ',rutas.get(i,2),',',rutas.get(i,3),' | PasoX: ',rutas.get(i,4),' | PasoY: ',rutas.get(i,5));
+            if rutas.get(i,0) is not None:
+                print(rutas.get(i,0),',',rutas.get(i,1),' -> ',rutas.get(i,2),',',rutas.get(i,3),' | PasoX: ',rutas.get(i,4),' | PasoY: ',rutas.get(i,5));
         print()

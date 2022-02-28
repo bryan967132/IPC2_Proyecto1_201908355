@@ -92,3 +92,15 @@ class list_e_pis:
         while actual and actual.piso_Artesanal.nombre != nombre:
             actual = actual.siguiente
         return actual.piso_Artesanal.patrones.getPatron(codigo)
+    
+    def getCostV(self,nombre):
+        actual = self.primero
+        while actual and actual.piso_Artesanal.nombre != nombre:
+            actual = actual.siguiente
+        return actual.piso_Artesanal.cVolt
+
+    def getCostI(self,nombre):
+        actual = self.primero
+        while actual and actual.piso_Artesanal.nombre != nombre:
+            actual = actual.siguiente
+        return actual.piso_Artesanal.cInt

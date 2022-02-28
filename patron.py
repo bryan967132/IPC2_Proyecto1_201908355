@@ -37,3 +37,25 @@ class list_e_pc:
             if actual.siguiente is None:
                 return
             actual = actual.siguiente
+
+    def intercambiar(self,i1,j1,i2,j2):
+        actual1 = self.primero
+        primero = None
+        while actual1:
+            if actual1.patron_C.i == i1 and actual1.patron_C.j == j1:
+                primero = actual1
+                break
+            actual1 = actual1.siguiente
+        
+        actual2 = self.primero
+        segundo = None
+        while actual2:
+            if actual2.patron_C.i == i2 and actual2.patron_C.j == j2:
+                segundo = actual2
+                break
+            actual2 = actual2.siguiente
+        
+        primero.patron_C.i = i2
+        primero.patron_C.j = j2
+        segundo.patron_C.i = i1
+        segundo.patron_C.j = j1
