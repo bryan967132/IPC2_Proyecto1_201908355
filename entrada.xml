@@ -24,7 +24,7 @@
                 WBBBWBWWW
             </patron>
             <patron codigo="cod22"> 
-                WWWWBWWWB
+                WWBWBWWWB
             </patron>
         </patrones>
     </piso>
@@ -39,6 +39,20 @@
             </patron>
             <patron codigo="cod32"> 
                 BBBWW
+            </patron>
+        </patrones>
+    </piso>
+    <piso nombre="ejemplo04">
+        <R> 4 </R>
+        <C> 4 </C>
+        <F> 1 </F>
+        <S> 2 </S>
+        <patrones>
+            <patron codigo="cod41"> 
+                WBBBBBBBBBBWBWBB
+            </patron>
+            <patron codigo="cod42"> 
+                BBBBBBBWBBBBBWBW
             </patron>
         </patrones>
     </piso>
