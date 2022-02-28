@@ -1,13 +1,13 @@
 class oFunc:
     def printMos(self,f,c,mosaico):
-        mos = ""
+        mos = ''
         for i in range(f):
             for j in range(c):
                 if mosaico.get(i,j) == 'B':
-                    mos += "░░"
+                    mos += '░░'
                 else:
-                    mos += "██"
-            mos += "\n"
+                    mos += '██'
+            mos += '\n'
         print(mos)
     
     def printPar(self,pares):
@@ -19,3 +19,9 @@ class oFunc:
         print('\n' + color,'Ubicados')
         for i in range(f):
             print(crd.get(i,0),',',crd.get(i,1))
+
+    def printRutas(self,t,rutas):
+        print()
+        for i in range(t):
+            print(rutas.get(i,0),',',rutas.get(i,1),' -> ',rutas.get(i,2),',',rutas.get(i,3),' | PasoX: ',rutas.get(i,4),' | PasoY: ',rutas.get(i,5));
+        print()
