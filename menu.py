@@ -94,6 +94,7 @@ class menu:
         instrucciones = 'Instrucciones\n'
         instrucciones += p.getMos(f,c,mosaico1)
         instrucciones += d.pasos
+        instrucciones += 'Costo Mínimo Total: Q ' + str(minCost)
         self.menuInstrucciones(instrucciones)
         print('Instrucciones Guardadas')
 

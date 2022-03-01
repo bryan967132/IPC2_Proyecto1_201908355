@@ -44,6 +44,7 @@ print('Volteos:',volteos,'\n')
 instrucciones = 'Instrucciones\n'
 instrucciones += p.getMos(f,c,mosaico1)
 instrucciones += d.pasos
+instrucciones += 'Costo Mínimo Total: Q ' + str(minCost)
 print(instrucciones)
 
 with io.open("Instrucciones/Instrucciones.txt","w",encoding="utf-8") as f:
