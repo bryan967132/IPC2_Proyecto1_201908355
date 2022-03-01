@@ -1,3 +1,4 @@
+import io
 from parseXML import parseXML
 from otrasF import oFunc
 from princF import pFunc
@@ -5,9 +6,9 @@ from princF import pFunc
 lista_piso = parseXML().getXML('entrada.xml')
 
 piso1 = "ejemplo04"
-ptrn1 = "cod42"
+ptrn1 = "cod41"
 piso2 = "ejemplo04"
-ptrn2 = "cod41"
+ptrn2 = "cod42"
 
 f = lista_piso.getF(piso1)
 c = lista_piso.getC(piso1)
@@ -22,9 +23,6 @@ d = pFunc()
 p.printMos(f,c,mosaico1)
 p.printMos(f,c,mosaico2)
 
-print("Costo intercambio: Q",costInt)
-print("Costo volteo: Q",costVolt)
-
 pares = d.getCantCol(f,c,mosaico1,mosaico2)
 color = d.getMenorC(pares)
 priSec = d.getPriSec(pares)
@@ -35,12 +33,18 @@ lenRutas = d.cantOpt(priSec.get(0) * priSec.get(1),rutas)
 rutas = d.optRutas(priSec.get(0) * priSec.get(1),rutas)
 rutas = d.crearCaminos(mosaico1,lenRutas,rutas,priSec.get(1),crd2,color)
 lenRutas = d.optCmns(mosaico1,priSec.get(1),crd2,color)
-intercambios = d.getMovT(f,c,lenRutas,rutas,mosaico1,mosaico2,color,costInt,costVolt)
-volteos = d.getVoltT(f,c,lenRutas,rutas,mosaico1,mosaico2,color,costInt,costVolt)
-minCost = d.minCost(intercambios,volteos,costInt,costVolt)
+d.transMos(f,c,lenRutas,rutas,mosaico1,mosaico2,color,costInt,costVolt)
+intercambios = d.getIntercambios()
+volteos = d.getVolteos()
+minCost = d.minCost(costInt,costVolt)
 print('Costo Mínimo: Q',minCost)
 print('Intercambios:',intercambios)
 print('Volteos:',volteos,'\n')
-print('Transición\n')
-p.printMos(f,c,mosaico1)
-d.transMos(f,c,lenRutas,rutas,mosaico1,mosaico2,color,costInt,costVolt)
+
+instrucciones = 'Instrucciones\n'
+instrucciones += p.getMos(f,c,mosaico1)
+instrucciones += d.pasos
+print(instrucciones)
+
+with io.open("Instrucciones/Instrucciones.txt","w",encoding="utf-8") as f:
+    f.write(instrucciones)

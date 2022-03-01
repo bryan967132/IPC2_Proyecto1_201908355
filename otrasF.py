@@ -3,12 +3,25 @@ class oFunc:
         mos = ''
         for i in range(f):
             for j in range(c):
-                if mosaico.get(i,j) == 'B':
+                if mosaico.get(i,j) == 'W':
                     mos += '░░'
                 else:
                     mos += '██'
             mos += '\n'
         print(mos)
+    
+    def getMos(self,f,c,mosaico):
+        mos = '\n'
+        for i in range(f):
+            mos += '   '
+            for j in range(c):
+                if mosaico.get(i,j) == 'W':
+                    mos += '░░'
+                else:
+                    mos += '██'
+            mos += '\n'
+        mos += '\n'
+        return mos
     
     def printPar(self,pares):
         print('W','B')

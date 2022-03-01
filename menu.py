@@ -1,3 +1,4 @@
+import io
 from parseXML import parseXML
 from otrasF import oFunc
 from princF import pFunc
@@ -71,6 +72,7 @@ class menu:
         p.printMos(f,c,mosaico2)
 
         d = pFunc()
+        
         pares = d.getCantCol(f,c,mosaico1,mosaico2)
         color = d.getMenorC(pares)
         priSec = d.getPriSec(pares)
@@ -81,12 +83,36 @@ class menu:
         rutas = d.optRutas(priSec.get(0) * priSec.get(1),rutas)
         rutas = d.crearCaminos(mosaico1,lenRutas,rutas,priSec.get(1),crd2,color)
         lenRutas = d.optCmns(mosaico1,priSec.get(1),crd2,color)
-        intercambios = d.getMovT(f,c,lenRutas,rutas,mosaico1,mosaico2,color,costInt,costVolt)
-        volteos = d.getVoltT(f,c,lenRutas,rutas,mosaico1,mosaico2,color,costInt,costVolt)
-        minCost = d.minCost(intercambios,volteos,costInt,costVolt)
+        d.transMos(f,c,lenRutas,rutas,mosaico1,mosaico2,color,costInt,costVolt)
+        intercambios = d.getIntercambios()
+        volteos = d.getVolteos()
+        minCost = d.minCost(costInt,costVolt)
         print('Costo Mínimo: Q',minCost)
         print('Intercambios:',intercambios)
         print('Volteos:',volteos,'\n')
-        print('Transición')
-        p.printMos(f,c,mosaico1)
-        d.transMos(f,c,lenRutas,rutas,mosaico1,mosaico2,color,costInt,costVolt)
+        
+        instrucciones = 'Instrucciones\n'
+        instrucciones += p.getMos(f,c,mosaico1)
+        instrucciones += d.pasos
+        self.menuInstrucciones(instrucciones)
+        print('Instrucciones Guardadas')
+
+    
+    def menuInstrucciones(self,instrucciones):
+        opcion = 0
+        while True:
+            try:
+                print("""Ver Instrucciones
+1. Ver En Consola
+2. Exportar En Archivo""")
+                opcion = int(input('Opción: '))
+                if opcion == 1:
+                    print(instrucciones)
+                    break
+                elif opcion == 2:
+                    with io.open("Instrucciones/Instrucciones.txt","w",encoding="utf-8") as f:
+                        f.write(instrucciones)
+                    break
+            except:
+                print('\nOpción Inválida\n')
+            print()

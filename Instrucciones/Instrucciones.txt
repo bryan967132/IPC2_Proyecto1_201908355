@@ -1,0 +1,39 @@
+Instrucciones
+
+   ░░██████
+   ░░██████
+   ██████░░
+   ██░░████
+
+1) Se intercambió. Costo: Q 2.0
+   En la Columna 4, intercambiar Fila 3 por Filas 2
+
+   ░░██████
+   ░░████░░
+   ████████
+   ██░░████
+
+2) Se volteó. Costo: Q 1.0
+   En Fila 2 Columna 1 voltear de Blanco a Negro
+
+   ░░██████
+   ██████░░
+   ████████
+   ██░░████
+
+3) Se volteó. Costo: Q 1.0
+   En Fila 4 Columna 4 voltear de Negro a Blanco
+
+   ░░██████
+   ██████░░
+   ████████
+   ██░░██░░
+
+4) Se volteó. Costo: Q 1.0
+   En Fila 1 Columna 1 voltear de Blanco a Negro
+
+   ████████
+   ██████░░
+   ████████
+   ██░░██░░
+
