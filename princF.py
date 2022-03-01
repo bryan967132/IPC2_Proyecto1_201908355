@@ -288,7 +288,7 @@ class pFunc:
             return True
         return False
 
-    def getMovT(self,fil,col,lenRutas,rutas,mosIni,mosFin,color):
+    def getMovT(self,fil,col,lenRutas,rutas,mosIni,mosFin,color,cInt,cVolt):
         movs = 0
         tmpMos = listaCant2()
         i = 0
@@ -311,28 +311,31 @@ class pFunc:
                     if x == rutas.get(i,0) and y == rutas.get(i,1):
                         f = x
                         c = y
-                        if abs(rutas.get(i,4)) != 0:
-                            m = 1
-                            while m <= abs(rutas.get(i,4)):
-                                mover = 1
-                                if rutas.get(i,4) < 0:
-                                    mover = -1
-                                movs += 1
-                                if self.verificar(f,c + mover,mosFin,color):
-                                    break
-                                c += mover
-                                m += 1
-                        if abs(rutas.get(i,5)) != 0:
-                            m = 1
-                            while m <= abs(rutas.get(i,5)):
-                                mover = 1
-                                if rutas.get(i,5) < 0:
-                                    mover = -1
-                                movs += 1
-                                if self.verificar(f + mover,c,mosFin,color):
-                                    break
-                                f += mover
-                                m += 1
+                        movT = abs(rutas.get(i,4)) + abs(rutas.get(i,5))
+                        if movT * cInt <= 2 * cVolt:
+                            if abs(rutas.get(i,4)) != 0:
+                                m = 1
+                                while m <= abs(rutas.get(i,4)):
+                                    mover = 1
+                                    if rutas.get(i,4) < 0:
+                                        mover = -1
+                                    movs += 1
+                                    if self.verificar(f,c + mover,mosFin,color):
+                                        break
+                                    c += mover
+                                    m += 1
+                            if abs(rutas.get(i,5)) != 0:
+                                m = 1
+                                while m <= abs(rutas.get(i,5)):
+                                    mover = 1
+                                    if rutas.get(i,5) < 0:
+                                        mover = -1
+                                    movs += 1
+                                    if self.verificar(f + mover,c,mosFin,color):
+                                        break
+                                    f += mover
+                                    m += 1
+                                break
                         parar = True
                         break
                     y += 1
@@ -342,7 +345,8 @@ class pFunc:
             i += 1
         return movs
         
-    def getVoltT(self,fil,col,lenRutas,rutas,mosIni,mosFin,color):
+    def getVoltT(self,fil,col,lenRutas,rutas,mosIni,mosFin,color,cInt,cVolt):
+        volteos = 0
         tmpMos = list_e_pc()
         i = 0
         while i < fil:
@@ -364,28 +368,34 @@ class pFunc:
                     if x == rutas.get(i,0) and y == rutas.get(i,1):
                         f = x
                         c = y
-                        if abs(rutas.get(i,4)) != 0:
-                            m = 1
-                            while m <= abs(rutas.get(i,4)):
-                                mover = 1
-                                if rutas.get(i,4) < 0:
-                                    mover = -1
-                                tmpMos.intercambiar(f,c,f,c + mover)
-                                if self.verificar(f,c + mover,mosFin,color):
-                                    break
-                                c += mover
-                                m += 1
-                        if abs(rutas.get(i,5)) != 0:
-                            m = 1
-                            while m <= abs(rutas.get(i,5)):
-                                mover = 1
-                                if rutas.get(i,5) < 0:
-                                    mover = -1
-                                tmpMos.intercambiar(f,c,f + mover,c)
-                                if self.verificar(f + mover,c,mosFin,color):
-                                    break
-                                f += mover
-                                m += 1
+                        movT = abs(rutas.get(i,4)) + abs(rutas.get(i,5))
+                        if movT * cInt <= 2 * cVolt:
+                            if abs(rutas.get(i,4)) != 0:
+                                m = 1
+                                while m <= abs(rutas.get(i,4)):
+                                    mover = 1
+                                    if rutas.get(i,4) < 0:
+                                        mover = -1
+                                    tmpMos.intercambiar(f,c,f,c + mover)
+                                    if self.verificar(f,c + mover,mosFin,color):
+                                        break
+                                    c += mover
+                                    m += 1
+                            if abs(rutas.get(i,5)) != 0:
+                                m = 1
+                                while m <= abs(rutas.get(i,5)):
+                                    mover = 1
+                                    if rutas.get(i,5) < 0:
+                                        mover = -1
+                                    tmpMos.intercambiar(f,c,f + mover,c)
+                                    if self.verificar(f + mover,c,mosFin,color):
+                                        break
+                                    f += mover
+                                    m += 1
+                        else:
+                            tmpMos.voltear(rutas.get(i,0),rutas.get(i,1))
+                            tmpMos.voltear(rutas.get(i,2),rutas.get(i,3))
+                            volteos += 2
                         parar = True
                         break
                     y += 1
@@ -393,7 +403,6 @@ class pFunc:
                     break
                 x += 1
             i += 1
-        volteos = 0
         i = 0
         while i < fil:
             j = 0
@@ -431,40 +440,59 @@ class pFunc:
                     if x == rutas.get(i,0) and y == rutas.get(i,1):
                         f = x
                         c = y
-                        if abs(rutas.get(i,4)) != 0:
-                            m = 1
-                            while m <= abs(rutas.get(i,4)):
-                                mover = 0
-                                if rutas.get(i,4) < 0:
+                        movT = abs(rutas.get(i,4)) + abs(rutas.get(i,5))
+                        if movT * cInt <= 2 * cVolt:
+                            if abs(rutas.get(i,4)) != 0:
+                                m = 1
+                                while m <= abs(rutas.get(i,4)):
+                                    mover = 0
                                     print(str(paso) + ')','Se intercambió. Costo: Q',cInt)
-                                    mover = -1
-                                else:
+                                    if rutas.get(i,4) < 0:
+                                        mover = -1
+                                    else:
+                                        mover = 1
+                                    print("{:<3}En la Fila {}, intercambiar Columna {} por Columna {}\n".format("",f + 1,c + 1,c + mover + 1))
+                                    tmpMos.intercambiar(f,c,f,c + mover)
+                                    p.printMos(fil,col,tmpMos)
+                                    paso += 1
+                                    if self.verificar(f,c + mover,mosFin,color):
+                                        break
+                                    c += mover
+                                    m += 1
+                            if abs(rutas.get(i,5)) != 0:
+                                m = 1
+                                while m <= abs(rutas.get(i,5)):
+                                    mover = 0
                                     print(str(paso) + ')','Se intercambió. Costo: Q',cInt)
-                                    mover = 1
-                                tmpMos.intercambiar(f,c,f,c + mover)
-                                p.printMos(fil,col,tmpMos)
-                                paso += 1
-                                if self.verificar(f,c + mover,mosFin,color):
-                                    break
-                                c += mover
-                                m += 1
-                        if abs(rutas.get(i,5)) != 0:
-                            m = 1
-                            while m <= abs(rutas.get(i,5)):
-                                mover = 0
-                                if rutas.get(i,5) < 0:
-                                    print(str(paso) + ')','Se intercambió. Costo: Q',cInt)
-                                    mover = -1
-                                else:
-                                    print(str(paso) + ')','Se intercambió. Costo: Q',cInt)
-                                    mover = 1
-                                tmpMos.intercambiar(f,c,f + mover,c)
-                                p.printMos(fil,col,tmpMos)
-                                paso += 1
-                                if self.verificar(f + mover,c,mosFin,color):
-                                    break
-                                f += mover
-                                m += 1
+                                    if rutas.get(i,5) < 0:
+                                        mover = -1
+                                    else:
+                                        mover = 1
+                                    print("{:<3}En la Columna {}, intercambiar Fila {} por Filas {}\n".format("",c + 1,f + 1,f + mover + 1))
+                                    tmpMos.intercambiar(f,c,f + mover,c)
+                                    p.printMos(fil,col,tmpMos)
+                                    paso += 1
+                                    if self.verificar(f + mover,c,mosFin,color):
+                                        break
+                                    f += mover
+                                    m += 1
+                        else:
+                            print(str(paso) + ')','Se volteó. Costo: Q',cVolt)
+                            if tmpMos.get(rutas.get(i,0),rutas.get(i,1)) == 'B':
+                                print("{:<3}En Fila {} Columna {} voltear de Negro a Blanco\n".format("",rutas.get(i,0) + 1,rutas.get(i,1) + 1))
+                            else:
+                                print("{:<3}En Fila {} Columna {} voltear de Blanco a Negro\n".format("",rutas.get(i,0) + 1,rutas.get(i,1) + 1))
+                            tmpMos.voltear(rutas.get(i,0),rutas.get(i,1))
+                            p.printMos(fil,col,tmpMos)
+                            paso += 1
+                            print(str(paso) + ')','Se volteó. Costo: Q',cVolt)
+                            if tmpMos.get(rutas.get(i,2),rutas.get(i,3)) == 'B':
+                                print("{:<3}En Fila {} Columna {} voltear de Negro a Blanco\n".format("",rutas.get(i,2) + 1,rutas.get(i,3) + 1))
+                            else:
+                                print("{:<3}En Fila {} Columna {} voltear de Blanco a Negro\n".format("",rutas.get(i,2) + 1,rutas.get(i,3) + 1))
+                            tmpMos.voltear(rutas.get(i,2),rutas.get(i,3))
+                            p.printMos(fil,col,tmpMos)
+                            paso += 1
                         parar = True
                         break
                     y += 1
@@ -478,7 +506,12 @@ class pFunc:
             while j < col:
                 if tmpMos.get(i,j) != mosFin.get(i,j):
                     print(str(paso) + ')','Se volteó. Costo: Q',cVolt)
+                    if tmpMos.get(i,j) == 'B':
+                        print("{:<3}En Fila {} Columna {} voltear de Negro a Blanco\n".format("",i + 1,j + 1))
+                    else:
+                        print("{:<3}En Fila {} Columna {} voltear de Blanco a Negro\n".format("",i + 1,j + 1))
                     tmpMos.voltear(i,j)
                     p.printMos(fil,col,tmpMos)
+                    paso += 1
                 j += 1
             i += 1
