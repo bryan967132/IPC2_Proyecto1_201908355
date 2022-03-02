@@ -70,4 +70,18 @@
             </patron>
         </patrones>
     </piso>
+    <piso nombre="ejemplo06">
+        <R> 4 </R>
+        <C> 5 </C>
+        <F> 1 </F>
+        <S> 1 </S>
+        <patrones>
+            <patron codigo="cod61"> 
+                WWWBWWBWWBWWBWWWWWWW
+            </patron>
+            <patron codigo="cod62"> 
+                BWWWWWWBWBWWWBWWWWBW
+            </patron>
+        </patrones>
+    </piso>
 </pisosArtesanales>
