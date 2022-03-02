@@ -46,13 +46,27 @@
         <R> 4 </R>
         <C> 4 </C>
         <F> 1 </F>
-        <S> 2 </S>
+        <S> 1 </S>
         <patrones>
             <patron codigo="cod41"> 
                 WBBBWBBBBBBWBWBB
             </patron>
             <patron codigo="cod42"> 
                 BBBBBBBWBBBBBWBW
+            </patron>
+        </patrones>
+    </piso>
+    <piso nombre="ejemplo05">
+        <R> 5 </R>
+        <C> 4 </C>
+        <F> 1 </F>
+        <S> 1 </S>
+        <patrones>
+            <patron codigo="cod51"> 
+                WBWBBWBWWBWBBWBWWBWB
+            </patron>
+            <patron codigo="cod52"> 
+                BWBWWBWBBWBWWBWBBWBW
             </patron>
         </patrones>
     </piso>

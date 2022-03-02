@@ -1,25 +1,35 @@
 class oFunc:
-    def printMos(self,f,c,mosaico):
-        mos = ''
-        for i in range(f):
-            for j in range(c):
-                if mosaico.get(i,j) == 'W':
-                    mos += '░░'
-                else:
-                    mos += '██'
-            mos += '\n'
-        print(mos)
-    
     def getMos(self,f,c,mosaico):
         mos = '\n'
-        for i in range(f):
+        i = 0
+        while i < f:
             mos += '   '
-            for j in range(c):
+            j = 0
+            while j < c:
+                if mosaico.get(i,j) == 'B':
+                    mos += '░░'
+                else:
+                    mos += '██'
+                j += 1
+            mos += '\n'
+            i += 1
+        mos += '\n'
+        return mos
+    
+    def getMosA(self,f,c,mosaico):
+        mos = '\n'
+        i = 0
+        while i < f:
+            mos += '   '
+            j = 0
+            while j < c:
                 if mosaico.get(i,j) == 'W':
                     mos += '░░'
                 else:
                     mos += '██'
+                j += 1
             mos += '\n'
+            i += 1
         mos += '\n'
         return mos
     
