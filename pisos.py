@@ -25,17 +25,27 @@ class list_e_pis:
             actual = actual.siguiente
         actual.siguiente = nodo(piso_Artesanal = piso)
 
+    def ordenar(self):
+        actual = self.primero
+        while actual.siguiente:
+            actual1 = actual
+            while actual1.siguiente:
+                if actual.piso_Artesanal.nombre > actual1.siguiente.piso_Artesanal.nombre:
+                    tmp = actual.piso_Artesanal.nombre
+                    actual.piso_Artesanal.nombre = actual1.siguiente.piso_Artesanal.nombre
+                    actual1.siguiente.piso_Artesanal.nombre = tmp
+                actual1 = actual1.siguiente
+            actual = actual.siguiente
+
     def recorrer(self):
         actual = self.primero
+        print()
         while actual is not None:
-            print("Nombre:",actual.piso_Artesanal.nombre,
-                "Filas:",actual.piso_Artesanal.filas,
-                "Columnas:",actual.piso_Artesanal.columnas,
-                "Costo por voltear:",actual.piso_Artesanal.cVolt,
-                "Costo por intercambiar:",actual.piso_Artesanal.cInt)
-            actual.piso_Artesanal.patrones.recorrer()            
-            print()
+            print("Nombre: {:<15} Filas: {:<10} Columnas: {:<10} Costo por Volteo: Q {:<10} Costo por Intercambio: {:<10}".format(actual.piso_Artesanal.nombre,actual.piso_Artesanal.filas,actual.piso_Artesanal.columnas,actual.piso_Artesanal.cVolt,actual.piso_Artesanal.cInt))
+            actual.piso_Artesanal.patrones.ordenar()
+            actual.piso_Artesanal.patrones.recorrer(actual.piso_Artesanal.filas,actual.piso_Artesanal.columnas)
             actual = actual.siguiente
+        print()
 
     def getF(self,nombre):
         actual = self.primero

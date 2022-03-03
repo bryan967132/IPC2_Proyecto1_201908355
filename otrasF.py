@@ -33,6 +33,22 @@ class oFunc:
         mos += '\n'
         return mos
     
+    def getPatron(self,f,c,mosaico):
+        mos = ''
+        i = 0
+        while i < f:
+            mos += '\t\t'
+            j = 0
+            while j < c:
+                if mosaico.get(i,j) == 'B':
+                    mos += '░░'
+                else:
+                    mos += '██'
+                j += 1
+            mos += '\n'
+            i += 1
+        return mos
+    
     def printPar(self,pares):
         print('W','B')
         for i in range(2):

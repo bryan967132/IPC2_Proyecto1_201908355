@@ -11,18 +11,23 @@ class parseXML:
 
         for piso in pisosArtesanales:
             nom = piso.attributes['nombre'].value.replace(" ","").replace("\n","")
-            r = int(piso.getElementsByTagName('R')[0].firstChild.data.replace(" ","").replace("\n",""))
-            c = int(piso.getElementsByTagName('C')[0].firstChild.data.replace(" ","").replace("\n",""))
-            f = float(piso.getElementsByTagName('F')[0].firstChild.data.replace(" ","").replace("\n",""))
-            s = float(piso.getElementsByTagName('S')[0].firstChild.data.replace(" ","").replace("\n",""))
+            r = 0;c = 0;f = 0;s = 0
+            for elemento in piso.getElementsByTagName('R'):
+                r = int(elemento.firstChild.data)
+            for elemento in piso.getElementsByTagName('C'):
+                c = int(elemento.firstChild.data)
+            for elemento in piso.getElementsByTagName('F'):
+                f = float(elemento.firstChild.data)
+            for elemento in piso.getElementsByTagName('S'):
+                s = float(elemento.firstChild.data)
 
             patrones = piso.getElementsByTagName('patron')
 
             lista_patron = list_e_pat()
 
             for patron in patrones:
-                codigP = patron.attributes['codigo'].value.replace(" ","").replace("\n","")
-                patPat = patron.firstChild.data.replace(" ","").replace("\n","")
+                codigP = str(patron.attributes['codigo'].value.replace(" ","").replace("\n",""))
+                patPat = str(patron.firstChild.data.replace(" ","").replace("\n",""))
 
                 lista_color = list_e_pc()
                 x = 0

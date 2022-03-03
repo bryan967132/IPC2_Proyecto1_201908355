@@ -404,9 +404,9 @@ class pFunc:
                             descIns = str(self.paso) + ') Se volteó. Costo: Q ' + str(cVolt) + '\n'
 
                             if tmpMos.get(rutas.get(i,0),rutas.get(i,1)) == 'B':
-                                descIns += "   En Fila " + str(rutas.get(i,0) + 1) + ", Columna " + str(rutas.get(i,1) + 1) + " voltear de Negro a Blanco\n"
+                                descIns += "   En Fila " + str(rutas.get(i,0) + 1) + " Columna " + str(rutas.get(i,1) + 1) + " voltear de Negro a Blanco\n"
                             else:
-                                descIns += "   En Fila " + str(rutas.get(i,0) + 1) + ", Columna " + str(rutas.get(i,1) + 1) + " voltear de Blanco a Negro\n"
+                                descIns += "   En Fila " + str(rutas.get(i,0) + 1) + " Columna " + str(rutas.get(i,1) + 1) + " voltear de Blanco a Negro\n"
 
                             self.proConsola += descIns
                             self.proArchivo += descIns
@@ -427,9 +427,9 @@ class pFunc:
                             descIns = str(self.paso) + ') Se volteó. Costo: Q ' + str(cVolt) + '\n'
 
                             if tmpMos.get(rutas.get(i,2),rutas.get(i,3)) == 'B':
-                                descIns += "   En Fila " + str(rutas.get(i,2) + 1) + ", Columna " + str(rutas.get(i,3) + 1) + " voltear de Negro a Blanco\n"
+                                descIns += "   En Fila " + str(rutas.get(i,2) + 1) + " Columna " + str(rutas.get(i,3) + 1) + " voltear de Negro a Blanco\n"
                             else:
-                                descIns +=  "   En Fila " + str(rutas.get(i,2) + 1) + ", Columna " + str(rutas.get(i,3) + 1) + " voltear de Blanco a Negro\n"
+                                descIns +=  "   En Fila " + str(rutas.get(i,2) + 1) + " Columna " + str(rutas.get(i,3) + 1) + " voltear de Blanco a Negro\n"
 
                             self.proConsola += descIns
                             self.proArchivo += descIns

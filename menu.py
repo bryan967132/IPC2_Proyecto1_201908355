@@ -4,15 +4,11 @@ from parseXML import parseXML
 from graficar import graficar
 from princF import pFunc
 class menu:
-    #imprimir con tabulación
-    #print("Nombre: {:<15} Filas: {:<4} Columnas: {:<4}".format(actual.piso_Artesanal.nombre,actual.piso_Artesanal.filas,actual.piso_Artesanal.columnas))
-    #print("Código: {}".format(actual.piso_patron.codigo))
-    
     def menuP(self):
         lista_piso = None
         opcion = 0
-        while opcion != 3:
-            try:
+        while opcion != 4:
+            #try:
                 self.opciones()
                 opcion = int(input('Opción: '))
                 if opcion == 1:
@@ -23,23 +19,30 @@ class menu:
                     except:
                         print('El XML no se encuentra en la ubicación especificada\n')
                 elif opcion == 2:
-                    if lista_piso is not None:
-                        self.operaciones(lista_piso)
+                    if lista_piso:
+                        lista_piso.ordenar()
+                        lista_piso.recorrer()
                     else:
                         print('\nNo se ha cargado información de los pisos\n')
                 elif opcion == 3:
+                    if lista_piso:
+                        self.operaciones(lista_piso)
+                    else:
+                        print('\nNo se ha cargado información de los pisos\n')
+                elif opcion == 4:
                     print('\n¡Finalizado!')
                 else:
                     print('\nSolo números entre 1 y 5\n')
-            except:
-                print('\nOpción inválida\n')
+            #except:
+                #print('\nOpción inválida\n')
 
         
     def opciones(self):
         print("""Menú Principal
 1. Cargar Archivos XML
-2. Operaciones Con Pisos
-3. Salir""")
+2. Ver Pisos Y Patrones
+3. Operaciones Con Pisos
+4. Salir""")
     
     def operaciones(self,lista_piso):
         g = graficar()

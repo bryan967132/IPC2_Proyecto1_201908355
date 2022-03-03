@@ -1,3 +1,4 @@
+from otrasF import oFunc
 class piso_Patron:
     def __init__(self,codigo,patron):
         self.codigo = codigo
@@ -21,11 +22,23 @@ class list_e_pat:
             actual = actual.siguiente
         actual.siguiente = nodo(piso_patron = patron)
 
-    def recorrer(self):
+    def ordenar(self):
+        actual = self.primero
+        while actual.siguiente:
+            actual1 = actual
+            while actual1.siguiente:
+                if actual.piso_patron.codigo > actual1.siguiente.piso_patron.codigo:
+                    tmp = actual.piso_patron.codigo
+                    actual.piso_patron.codigo = actual1.siguiente.piso_patron.codigo
+                    actual1.siguiente.piso_patron.codigo = tmp
+                actual1 = actual1.siguiente
+            actual = actual.siguiente
+
+    def recorrer(self,f,c):
         actual = self.primero
         while actual is not None:
             print("\tCodigo:",actual.piso_patron.codigo)
-            actual.piso_patron.patron.recorrer()
+            print(oFunc().getPatron(f,c,self.getPatron(actual.piso_patron.codigo)))
             actual = actual.siguiente
 
     def buscar(self,codigo):

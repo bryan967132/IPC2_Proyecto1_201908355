@@ -71,15 +71,29 @@
         </patrones>
     </piso>
     <piso nombre="ejemplo06">
+        <R> 5 </R>
+        <C> 5 </C>
+        <F> 1 </F>
+        <S> 1 </S>
+        <patrones>
+            <patron codigo="cod62"> 
+                WBBBWBBBBBBWBWBBWWBBWBWBB
+            </patron>
+            <patron codigo="cod61"> 
+                BBBBBBBWBBBBBWBWWWWWBBBBW
+            </patron>
+        </patrones>
+    </piso>
+    <piso nombre="ejemplo07">
         <R> 4 </R>
         <C> 5 </C>
         <F> 1 </F>
         <S> 1 </S>
         <patrones>
-            <patron codigo="cod61"> 
+            <patron codigo="cod71"> 
                 WWWBWWBWWBWWBWWWWWWW
             </patron>
-            <patron codigo="cod62"> 
+            <patron codigo="cod72"> 
                 BWWWWWWBWBWWWBWWWWBW
             </patron>
         </patrones>
