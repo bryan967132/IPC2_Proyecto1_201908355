@@ -76,10 +76,10 @@
         <F> 1 </F>
         <S> 1 </S>
         <patrones>
-            <patron codigo="cod62"> 
+            <patron codigo="cod61"> 
                 WBBBWBBBBBBWBWBBWWBBWBWBB
             </patron>
-            <patron codigo="cod61"> 
+            <patron codigo="cod62"> 
                 BBBBBBBWBBBBBWBWWWWWBBBBW
             </patron>
         </patrones>

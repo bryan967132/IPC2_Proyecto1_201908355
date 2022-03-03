@@ -344,10 +344,10 @@ class pFunc:
                                     else:
                                         mover = 1
                                     
-                                    descIns += "   En la Fila " + str(f + 1) + ", intercambiar Columna " + str(c + 1) + " por Columna " + str(c + mover + 1) + "\n"
+                                    detalle = "   En la Fila " + str(f + 1) + ", intercambiar Columna " + str(c + 1) + " por Columna " + str(c + mover + 1) + "\n"
                                     
-                                    self.proConsola += descIns
-                                    self.proArchivo += descIns
+                                    self.proConsola += descIns + detalle
+                                    self.proArchivo += descIns + detalle
 
                                     tmpMos.intercambiar(f,c,f,c + mover)
                                     self.proConsola += p.getMos(fil,col,tmpMos)
@@ -357,7 +357,7 @@ class pFunc:
                                     modoti = g.getDot(modoti,'')
                                     g.exportPNG(self.paso,modoti)
 
-                                    instruccion = inst(self.paso,descIns)
+                                    instruccion = inst(self.paso,descIns,detalle)
                                     self.instrucciones.insertar(instruccion)
 
                                     self.intercambios += 1
@@ -378,10 +378,10 @@ class pFunc:
                                     else:
                                         mover = 1
                                     
-                                    descIns += "   En la Columna " + str(c + 1) + ", intercambiar Fila " + str(f + 1) + " por Filas " + str(f + mover + 1) + "\n"
+                                    detalle = "   En la Columna " + str(c + 1) + ", intercambiar Fila " + str(f + 1) + " por Filas " + str(f + mover + 1) + "\n"
                                     
-                                    self.proConsola += descIns
-                                    self.proArchivo += descIns
+                                    self.proConsola += descIns + detalle
+                                    self.proArchivo += descIns + detalle
 
                                     tmpMos.intercambiar(f,c,f + mover,c)
                                     self.proConsola += p.getMos(fil,col,tmpMos)
@@ -391,7 +391,7 @@ class pFunc:
                                     modoti = g.getDot(modoti,'')
                                     g.exportPNG(self.paso,modoti)
 
-                                    instruccion = inst(self.paso,descIns)
+                                    instruccion = inst(self.paso,descIns,detalle)
                                     self.instrucciones.insertar(instruccion)
 
                                     self.intercambios += 1
@@ -402,14 +402,14 @@ class pFunc:
                                     m += 1
                         else:
                             descIns = str(self.paso) + ') Se volteó. Costo: Q ' + str(cVolt) + '\n'
-
+                            detalle = ''
                             if tmpMos.get(rutas.get(i,0),rutas.get(i,1)) == 'B':
-                                descIns += "   En Fila " + str(rutas.get(i,0) + 1) + " Columna " + str(rutas.get(i,1) + 1) + " voltear de Negro a Blanco\n"
+                                detalle = "   En Fila " + str(rutas.get(i,0) + 1) + " Columna " + str(rutas.get(i,1) + 1) + " voltear de Negro a Blanco\n"
                             else:
-                                descIns += "   En Fila " + str(rutas.get(i,0) + 1) + " Columna " + str(rutas.get(i,1) + 1) + " voltear de Blanco a Negro\n"
+                                detalle = "   En Fila " + str(rutas.get(i,0) + 1) + " Columna " + str(rutas.get(i,1) + 1) + " voltear de Blanco a Negro\n"
 
-                            self.proConsola += descIns
-                            self.proArchivo += descIns
+                            self.proConsola += descIns + detalle
+                            self.proArchivo += descIns + detalle
                                                         
                             tmpMos.voltear(rutas.get(i,0),rutas.get(i,1))
                             self.proConsola += p.getMos(fil,col,tmpMos)
@@ -419,20 +419,20 @@ class pFunc:
                             modoti = g.getDot(modoti,'')
                             g.exportPNG(self.paso,modoti)
 
-                            instruccion = inst(self.paso,descIns)
+                            instruccion = inst(self.paso,descIns,detalle)
                             self.instrucciones.insertar(instruccion)
 
                             self.paso += 1
 
                             descIns = str(self.paso) + ') Se volteó. Costo: Q ' + str(cVolt) + '\n'
-
+                            detalle = ''
                             if tmpMos.get(rutas.get(i,2),rutas.get(i,3)) == 'B':
-                                descIns += "   En Fila " + str(rutas.get(i,2) + 1) + " Columna " + str(rutas.get(i,3) + 1) + " voltear de Negro a Blanco\n"
+                                detalle = "   En Fila " + str(rutas.get(i,2) + 1) + " Columna " + str(rutas.get(i,3) + 1) + " voltear de Negro a Blanco\n"
                             else:
-                                descIns +=  "   En Fila " + str(rutas.get(i,2) + 1) + " Columna " + str(rutas.get(i,3) + 1) + " voltear de Blanco a Negro\n"
+                                detalle = "   En Fila " + str(rutas.get(i,2) + 1) + " Columna " + str(rutas.get(i,3) + 1) + " voltear de Blanco a Negro\n"
 
-                            self.proConsola += descIns
-                            self.proArchivo += descIns
+                            self.proConsola += descIns + detalle
+                            self.proArchivo += descIns + detalle
 
                             tmpMos.voltear(rutas.get(i,2),rutas.get(i,3))
                             self.proConsola += p.getMos(fil,col,tmpMos)
@@ -442,7 +442,7 @@ class pFunc:
                             modoti = g.getDot(modoti,'')
                             g.exportPNG(self.paso,modoti)
 
-                            instruccion = inst(self.paso,descIns)
+                            instruccion = inst(self.paso,descIns,detalle)
                             self.instrucciones.insertar(instruccion)
 
                             self.paso += 1
@@ -460,14 +460,14 @@ class pFunc:
             while j < col:
                 if tmpMos.get(i,j) != mosFin.get(i,j):
                     descIns = str(self.paso) + ') Se volteó. Costo: Q ' + str(cVolt) + '\n'
-
+                    detalle = ''
                     if tmpMos.get(i,j) == 'B':
-                        descIns += "   En Fila " + str(i + 1) + " Columna " + str(j + 1) + " voltear de Negro a Blanco\n"
+                        detalle = "   En Fila " + str(i + 1) + " Columna " + str(j + 1) + " voltear de Negro a Blanco\n"
                     else:
-                        descIns += "   En Fila " + str(i + 1) + " Columna " + str(j + 1) + " voltear de Blanco a Negro\n"
+                        detalle = "   En Fila " + str(i + 1) + " Columna " + str(j + 1) + " voltear de Blanco a Negro\n"
                     
-                    self.proConsola += descIns
-                    self.proArchivo += descIns
+                    self.proConsola += descIns + detalle
+                    self.proArchivo += descIns + detalle
 
                     tmpMos.voltear(i,j)
                     self.proConsola += p.getMos(fil,col,tmpMos)
@@ -477,7 +477,7 @@ class pFunc:
                     modoti = g.getDot(modoti,'')
                     g.exportPNG(self.paso,modoti)
                     
-                    instruccion = inst(self.paso,descIns)
+                    instruccion = inst(self.paso,descIns,detalle)
                     self.instrucciones.insertar(instruccion)
 
                     self.paso += 1
@@ -501,3 +501,6 @@ class pFunc:
     
     def getInstArchivo(self):
         return self.proArchivo
+
+    def getListaInst(self):
+        return self.instrucciones

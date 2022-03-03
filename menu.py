@@ -1,5 +1,6 @@
 import io
 import webbrowser
+from parsePDF import pdfExport
 from parseXML import parseXML
 from graficar import graficar
 from princF import pFunc
@@ -7,8 +8,9 @@ class menu:
     def menuP(self):
         lista_piso = None
         opcion = 0
+        print()
         while opcion != 4:
-            #try:
+            try:
                 self.opciones()
                 opcion = int(input('Opción: '))
                 if opcion == 1:
@@ -33,8 +35,8 @@ class menu:
                     print('\n¡Finalizado!')
                 else:
                     print('\nSolo números entre 1 y 5\n')
-            #except:
-                #print('\nOpción inválida\n')
+            except:
+                print('\nOpción inválida\n')
 
         
     def opciones(self):
@@ -99,16 +101,17 @@ class menu:
         print('Intercambios:',intercambios)
         print('Volteos:',volteos,'\n')
         
-        self.menuInstrucciones(d)
+        self.menuInstrucciones(f,c,d)
         g.parsePDF('mosaico' + str(intercambios + volteos))
     
-    def menuInstrucciones(self,d):
+    def menuInstrucciones(self,fil,col,d):
         opcion = 0
         while True:
             try:
                 print("""Ver Instrucciones
 1. Ver En Consola
-2. Exportar En Archivo""")
+2. Exportar En Archivo .txt
+3. Exportar En Archivo .pdf""")
                 opcion = int(input('Opción: '))
                 if opcion == 1:
                     print('\n' + d.getInstConsola() + '\n')
@@ -119,6 +122,9 @@ class menu:
                     webbrowser.open("Instrucciones.txt")
                     print('\nInstrucciones Exportadas\n')
                     break
+                elif opcion == 3:
+                    pdfExport().exportarPDF(fil,col,d.getIntercambios() + d.getVolteos(),d.getListaInst())
+                    print('\nInstrucciones Exportadas\n')
+                    break
             except:
                 print('\nOpción Inválida\n')
-            print()

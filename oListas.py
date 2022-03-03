@@ -1,7 +1,8 @@
 class inst:
-    def __init__(self,i,instruccion):
+    def __init__(self,i,instruccion,detalles):
         self.i = i
         self.instruccion = instruccion
+        self.detalles = detalles
 
 class cant1:
     def __init__(self,i,cantC):
@@ -37,6 +38,13 @@ class listaInst:
         while actual:
             if actual.objeto.i == i:
                 return actual.objeto.instruccion
+            actual = actual.siguiente
+    
+    def getDetalles(self,i):
+        actual = self.primero
+        while actual:
+            if actual.objeto.i == i:
+                return actual.objeto.detalles
             actual = actual.siguiente
 
 class listaCant1:
