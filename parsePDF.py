@@ -20,9 +20,9 @@ class pdfExport:
             else:
                 c.drawString(50 + izquierda,h - altura - 60,'Patrón Final')
             img = ImageReader('Patrones/mosaico' + str(i) + '.png')
-            c.drawImage(img,65 + izquierda, h - altura - 150,width = col*16,height = fil*12)
+            c.drawImage(img,65 + izquierda, h - altura - fil*15 - 85,width = col*20,height = fil*15)
             if i % 2 != 0:
-                altura += 130
+                altura += 60 + fil*15
             if (h - altura - 90) <= 50:
                 c.showPage()
                 altura = 0
