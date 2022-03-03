@@ -2,8 +2,6 @@ from patron import list_e_pc,patron_C
 from oListas import cant1,cant2,inst,listaCant1,listaCant2,listaInst
 from graficar import graficar
 from otrasF import oFunc
-import webbrowser
-import os
 class pFunc:
     def getCantCol(self,f,c,mosaico1,mosaico2):
         w1 = 0
@@ -337,14 +335,14 @@ class pFunc:
                                 m = 1
                                 while m <= abs(rutas.get(i,4)):
                                     mover = 0
-                                    descIns = str(self.paso) + ') Se intercambió. Costo: Q ' + str(cInt) + '\n'
+                                    descIns = str(self.paso) + ') Intercambio. Costo: Q ' + str(cInt) + '\n'
                                     
                                     if rutas.get(i,4) < 0:
                                         mover = -1
                                     else:
                                         mover = 1
                                     
-                                    detalle = "   En la Fila " + str(f + 1) + ", intercambiar Columna " + str(c + 1) + " por Columna " + str(c + mover + 1) + "\n"
+                                    detalle = "   En la Fila " + str(f + 1) + ", intercambiar Columna " + str(c + 1) + " con Columna " + str(c + mover + 1) + "\n"
                                     
                                     self.proConsola += descIns + detalle
                                     self.proArchivo += descIns + detalle
@@ -371,14 +369,14 @@ class pFunc:
                                 while m <= abs(rutas.get(i,5)):
                                     mover = 0
 
-                                    descIns = str(self.paso) + ') Se intercambió. Costo: Q ' + str(cInt) + '\n'
+                                    descIns = str(self.paso) + ') Intercambio. Costo: Q ' + str(cInt) + '\n'
 
                                     if rutas.get(i,5) < 0:
                                         mover = -1
                                     else:
                                         mover = 1
                                     
-                                    detalle = "   En la Columna " + str(c + 1) + ", intercambiar Fila " + str(f + 1) + " por Filas " + str(f + mover + 1) + "\n"
+                                    detalle = "   En la Columna " + str(c + 1) + ", intercambiar Fila " + str(f + 1) + " con Filas " + str(f + mover + 1) + "\n"
                                     
                                     self.proConsola += descIns + detalle
                                     self.proArchivo += descIns + detalle
@@ -401,7 +399,7 @@ class pFunc:
                                     f += mover
                                     m += 1
                         else:
-                            descIns = str(self.paso) + ') Se volteó. Costo: Q ' + str(cVolt) + '\n'
+                            descIns = str(self.paso) + ') Volteo. Costo: Q ' + str(cVolt) + '\n'
                             detalle = ''
                             if tmpMos.get(rutas.get(i,0),rutas.get(i,1)) == 'B':
                                 detalle = "   En Fila " + str(rutas.get(i,0) + 1) + " Columna " + str(rutas.get(i,1) + 1) + " voltear de Negro a Blanco\n"
@@ -424,7 +422,7 @@ class pFunc:
 
                             self.paso += 1
 
-                            descIns = str(self.paso) + ') Se volteó. Costo: Q ' + str(cVolt) + '\n'
+                            descIns = str(self.paso) + ') Volteo. Costo: Q ' + str(cVolt) + '\n'
                             detalle = ''
                             if tmpMos.get(rutas.get(i,2),rutas.get(i,3)) == 'B':
                                 detalle = "   En Fila " + str(rutas.get(i,2) + 1) + " Columna " + str(rutas.get(i,3) + 1) + " voltear de Negro a Blanco\n"
@@ -459,7 +457,7 @@ class pFunc:
             j = 0
             while j < col:
                 if tmpMos.get(i,j) != mosFin.get(i,j):
-                    descIns = str(self.paso) + ') Se volteó. Costo: Q ' + str(cVolt) + '\n'
+                    descIns = str(self.paso) + ') Volteo. Costo: Q ' + str(cVolt) + '\n'
                     detalle = ''
                     if tmpMos.get(i,j) == 'B':
                         detalle = "   En Fila " + str(i + 1) + " Columna " + str(j + 1) + " voltear de Negro a Blanco\n"

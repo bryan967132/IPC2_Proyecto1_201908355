@@ -11,7 +11,7 @@ class pdfExport:
         altura = 20
         i = 0
         while i <= pasos:
-            izquierda = w / 2
+            izquierda = (w / 2) - 25
             if i % 2 == 0:
                 izquierda = 0
             if i < pasos:
