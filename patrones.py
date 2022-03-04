@@ -28,9 +28,15 @@ class list_e_pat:
             actual1 = actual
             while actual1.siguiente:
                 if actual.piso_patron.codigo > actual1.siguiente.piso_patron.codigo:
+                    
                     tmp = actual.piso_patron.codigo
                     actual.piso_patron.codigo = actual1.siguiente.piso_patron.codigo
                     actual1.siguiente.piso_patron.codigo = tmp
+
+                    tmp = actual.piso_patron.patron
+                    actual.piso_patron.patron = actual1.siguiente.piso_patron.patron
+                    actual1.siguiente.piso_patron.patron = tmp
+
                 actual1 = actual1.siguiente
             actual = actual.siguiente
 

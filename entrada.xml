@@ -1,5 +1,19 @@
 <?xml version="1.0"?>
 <pisosArtesanales>
+    <piso nombre="ejemplo06">
+        <R> 5 </R>
+        <C> 5 </C>
+        <F> 1 </F>
+        <S> 1 </S>
+        <patrones>
+            <patron codigo="cod62"> 
+                BBBBBBBWBBBBBWBWWWWWBBBBW
+            </patron>
+            <patron codigo="cod61"> 
+                WBBBWBBBBBBWBWBBWWBBWBWBB
+            </patron>
+        </patrones>
+    </piso>
     <piso nombre="ejemplo01">
         <R> 2 </R>
         <C> 4 </C>
@@ -11,20 +25,6 @@
             </patron>
             <patron codigo="cod12"> 
                 BWBWWWWW
-            </patron>
-        </patrones>
-    </piso>
-    <piso nombre="ejemplo02">
-        <R> 3 </R>
-        <C> 3 </C>
-        <F> 1 </F>
-        <S> 1 </S>
-        <patrones>
-            <patron codigo="cod21"> 
-                WBBBWBWWW
-            </patron>
-            <patron codigo="cod22"> 
-                WWWWBWWWB
             </patron>
         </patrones>
     </piso>
@@ -48,11 +48,25 @@
         <F> 1 </F>
         <S> 1 </S>
         <patrones>
+            <patron codigo="cod42"> 
+                BBBBBBBWBBBBBWBW
+            </patron>
             <patron codigo="cod41"> 
                 WBBBWBBBBBBWBWBB
             </patron>
-            <patron codigo="cod42"> 
-                BBBBBBBWBBBBBWBW
+        </patrones>
+    </piso>
+    <piso nombre="ejemplo02">
+        <R> 3 </R>
+        <C> 3 </C>
+        <F> 1 </F>
+        <S> 1 </S>
+        <patrones>
+            <patron codigo="cod22"> 
+                WWWWBWWWB
+            </patron>
+            <patron codigo="cod21"> 
+                WBBBWBWWW
             </patron>
         </patrones>
     </piso>
@@ -67,20 +81,6 @@
             </patron>
             <patron codigo="cod52"> 
                 BWBWWBWBBWBWWBWBBWBW
-            </patron>
-        </patrones>
-    </piso>
-    <piso nombre="ejemplo06">
-        <R> 5 </R>
-        <C> 5 </C>
-        <F> 1 </F>
-        <S> 1 </S>
-        <patrones>
-            <patron codigo="cod61"> 
-                WBBBWBBBBBBWBWBBWWBBWBWBB
-            </patron>
-            <patron codigo="cod62"> 
-                BBBBBBBWBBBBBWBWWWWWBBBBW
             </patron>
         </patrones>
     </piso>
