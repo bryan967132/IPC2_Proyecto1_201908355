@@ -51,38 +51,28 @@ class menu:
         piso1 = input("\nIngrese el nombre del primer piso: ")
         while lista_piso.buscarP(piso1):
             piso1 = input("Ingrese el nombre del primer piso: ")
-        
         ptrn1 = input("Ingrese el código del patrón: ")
         while lista_piso.buscarPatronP(piso1,ptrn1):
             ptrn1 = input("Ingrese el código del patrón: ")
-        
         f = lista_piso.getF(piso1)
         c = lista_piso.getC(piso1)
-
         mosaico1 = lista_piso.getMos(piso1,ptrn1)
         mdot1 = g.dibujar(f,c,mosaico1)
         mdot1 = g.getDot(mdot1,'')
         g.exportPDF('mosaico0',mdot1)
         g.exportPNG(0,mdot1)
         print()
-        
         piso2 = input("Ingrese el nombre del segundo piso: ")
         while lista_piso.buscarS(f,c,piso2):
             piso2 = input("Ingrese el nombre del segundo piso: ")
-        
         ptrn2 = input("Ingrese el código del patrón: ")
         while lista_piso.buscarPatronS(piso1,ptrn1,piso2,ptrn2):
             ptrn2 = input("Ingrese el código del patrón: ")
-        
         print()
-        
         mosaico2 = lista_piso.getMos(piso2,ptrn2)
-        
         costInt = lista_piso.getCostI(piso1)
         costVolt = lista_piso.getCostV(piso1)
-
         d = pFunc()
-        
         pares = d.getCantCol(f,c,mosaico1,mosaico2)
         color = d.getMenorC(pares)
         priSec = d.getPriSec(pares)
@@ -100,7 +90,6 @@ class menu:
         print('Costo Mínimo: Q',minCost)
         print('Intercambios:',intercambios)
         print('Volteos:',volteos,'\n')
-        
         self.menuInstrucciones(f,c,d)
         g.parsePDF('mosaico' + str(intercambios + volteos))
     

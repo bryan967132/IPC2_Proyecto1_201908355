@@ -111,7 +111,6 @@ class listaCant2:
                 primero = actual1
                 break
             actual1 = actual1.siguiente
-        
         actual2 = self.primero
         segundo = None
         while actual2:
@@ -119,7 +118,6 @@ class listaCant2:
                 segundo = actual2
                 break
             actual2 = actual2.siguiente
-
         primero.objeto.i = i1
         primero.objeto.j = j1
         segundo.objeto.i = i0

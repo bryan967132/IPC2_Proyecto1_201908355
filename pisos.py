@@ -31,31 +31,24 @@ class list_e_pis:
             actual1 = actual
             while actual1.siguiente:
                 if actual.piso_Artesanal.nombre > actual1.siguiente.piso_Artesanal.nombre:
-
                     tmp = actual.piso_Artesanal.nombre
                     actual.piso_Artesanal.nombre = actual1.siguiente.piso_Artesanal.nombre
                     actual1.siguiente.piso_Artesanal.nombre = tmp
-
                     tmp = actual.piso_Artesanal.filas
                     actual.piso_Artesanal.filas = actual1.siguiente.piso_Artesanal.filas
                     actual1.siguiente.piso_Artesanal.filas = tmp
-
                     tmp = actual.piso_Artesanal.columnas
                     actual.piso_Artesanal.columnas = actual1.siguiente.piso_Artesanal.columnas
                     actual1.siguiente.piso_Artesanal.columnas = tmp
-
                     tmp = actual.piso_Artesanal.cVolt
                     actual.piso_Artesanal.cVolt = actual1.siguiente.piso_Artesanal.cVolt
                     actual1.siguiente.piso_Artesanal.cVolt = tmp
-
                     tmp = actual.piso_Artesanal.cInt
                     actual.piso_Artesanal.cInt = actual1.siguiente.piso_Artesanal.cInt
                     actual1.siguiente.piso_Artesanal.cInt = tmp
-
                     tmp = actual.piso_Artesanal.patrones
                     actual.piso_Artesanal.patrones = actual1.siguiente.piso_Artesanal.patrones
                     actual1.siguiente.piso_Artesanal.patrones = tmp
-
                 actual1 = actual1.siguiente
             actual = actual.siguiente
 
@@ -97,7 +90,6 @@ class list_e_pis:
                 print("El piso no existe en el sistema")
                 return True
             actual = actual.siguiente
-            
         if actual.piso_Artesanal.filas == filas and actual.piso_Artesanal.columnas == columnas:
             return False
         print("El piso no tiene las mismas dimensiones que el primero")

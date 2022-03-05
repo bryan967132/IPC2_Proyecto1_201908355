@@ -6,12 +6,9 @@ class parseXML:
     def getXML(self,ruta):
         myDoc = minidom.parse(ruta)
         pisosArtesanales = myDoc.getElementsByTagName('piso')
-
         lista_piso = list_e_pis()
-
         for piso in pisosArtesanales:
-            nom = piso.attributes['nombre'].value.replace(" ","").replace("\n","")
-            r = 0;c = 0;f = 0;s = 0
+            nom = piso.attributes['nombre'].value.strip()
             for elemento in piso.getElementsByTagName('R'):
                 r = int(elemento.firstChild.data)
             for elemento in piso.getElementsByTagName('C'):
@@ -20,15 +17,11 @@ class parseXML:
                 f = float(elemento.firstChild.data)
             for elemento in piso.getElementsByTagName('S'):
                 s = float(elemento.firstChild.data)
-
             patrones = piso.getElementsByTagName('patron')
-
             lista_patron = list_e_pat()
-
             for patron in patrones:
-                codigP = str(patron.attributes['codigo'].value.replace(" ","").replace("\n",""))
-                patPat = str(patron.firstChild.data.replace(" ","").replace("\n",""))
-
+                codigP = patron.attributes['codigo'].value.strip()
+                patPat = patron.firstChild.data.strip()
                 lista_color = list_e_pc()
                 x = 0
                 y = 0
@@ -39,11 +32,8 @@ class parseXML:
                         x = -1
                         y += 1
                     x += 1
-
                 nuevoPatron = piso_Patron(codigP,lista_color)
                 lista_patron.insertar(nuevoPatron)
-
             nuevoPiso = piso_Artesanal(nom,r,c,f,s,lista_patron)
             lista_piso.insertar(nuevoPiso)
-        
         return lista_piso
