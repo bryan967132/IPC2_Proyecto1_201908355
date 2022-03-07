@@ -1,12 +1,10 @@
 from patron import list_e_pc,patron_C
-from oListas import cant1,cant2,listaCant1,listaCant2
+from oListas import cant1,cant2,inst,listaCant1,listaCant2,listaInst
+from graficar import graficar
 from otrasF import oFunc
 class pFunc:
     def getCantCol(self,f,c,mosaico1,mosaico2):
-        w1 = 0
-        b1 = 0
-        w2 = 0
-        b2 = 0
+        w1 = 0;b1 = 0;w2 = 0;b2 = 0
         i = 0
         while i < f:
             j= 0
@@ -21,10 +19,8 @@ class pFunc:
                     b2 += 1
                 j += 1
             i += 1
-
         p_par0 = cant2(0,0,w1);p_par1 = cant2(0,1,b1)
         s_par0 = cant2(1,0,w2);s_par1 = cant2(1,1,b2)
-
         pares = listaCant2()
         pares.insertar(p_par0);pares.insertar(p_par1)
         pares.insertar(s_par0);pares.insertar(s_par1)
@@ -36,18 +32,12 @@ class pFunc:
         return 'B'
     
     def getPriSec(self,pares):
-        pri = 0
-        sec = 0
+        pri = 0;sec = 0
         if pares.get(0,0) < pares.get(0,1):
-            pri = pares.get(0,0)
-            sec = pares.get(1,0)
+            pri = pares.get(0,0);sec = pares.get(1,0)
         else:
-            pri = pares.get(0,1)
-            sec = pares.get(1,1)
-        
-        primero = cant1(0,pri)
-        segundo = cant1(1,sec)
-
+            pri = pares.get(0,1);sec = pares.get(1,1)
+        primero = cant1(0,pri);segundo = cant1(1,sec)
         mayMen = listaCant1()
         mayMen.insertar(primero);mayMen.insertar(segundo)
         return mayMen
@@ -60,8 +50,7 @@ class pFunc:
             j = 0
             while j < c:
                 if mosaico.get(i,j) == color:
-                    par1 = cant2(fila,0,i)
-                    par2 = cant2(fila,1,j)
+                    par1 = cant2(fila,0,i);par2 = cant2(fila,1,j)
                     pares.insertar(par1)
                     pares.insertar(par2)
                     fila += 1
@@ -288,127 +277,21 @@ class pFunc:
             return True
         return False
 
-    def getMovT(self,fil,col,lenRutas,rutas,mosIni,mosFin,color):
-        movs = 0
-        tmpMos = listaCant2()
-        i = 0
-        while i < fil:
-            j = 0
-            while j < col:
-                tmpCol = cant2(i,j,mosIni.get(i,j))
-                tmpMos.insertar(tmpCol)
-                j += 1
-            i += 1
-        i = 0
-        while i < lenRutas:
-            x = 0
-            while x < fil:
-                parar = False
-                y = 0
-                while y < col:
-                    f = 0
-                    c = 0
-                    if x == rutas.get(i,0) and y == rutas.get(i,1):
-                        f = x
-                        c = y
-                        if abs(rutas.get(i,4)) != 0:
-                            m = 1
-                            while m <= abs(rutas.get(i,4)):
-                                mover = 1
-                                if rutas.get(i,4) < 0:
-                                    mover = -1
-                                movs += 1
-                                if self.verificar(f,c + mover,mosFin,color):
-                                    break
-                                c += mover
-                                m += 1
-                        if abs(rutas.get(i,5)) != 0:
-                            m = 1
-                            while m <= abs(rutas.get(i,5)):
-                                mover = 1
-                                if rutas.get(i,5) < 0:
-                                    mover = -1
-                                movs += 1
-                                if self.verificar(f + mover,c,mosFin,color):
-                                    break
-                                f += mover
-                                m += 1
-                        parar = True
-                        break
-                    y += 1
-                if parar:
-                    break
-                x += 1
-            i += 1
-        return movs
-        
-    def getVoltT(self,fil,col,lenRutas,rutas,mosIni,mosFin,color):
-        tmpMos = list_e_pc()
-        i = 0
-        while i < fil:
-            j = 0
-            while j < col:
-                tmpCol = patron_C(i,j,mosIni.get(i,j))
-                tmpMos.insertar(tmpCol)
-                j += 1
-            i += 1
-        i = 0
-        while i < lenRutas:
-            x = 0
-            while x < fil:
-                parar = False
-                y = 0
-                while y < col:
-                    f = 0
-                    c = 0
-                    if x == rutas.get(i,0) and y == rutas.get(i,1):
-                        f = x
-                        c = y
-                        if abs(rutas.get(i,4)) != 0:
-                            m = 1
-                            while m <= abs(rutas.get(i,4)):
-                                mover = 1
-                                if rutas.get(i,4) < 0:
-                                    mover = -1
-                                tmpMos.intercambiar(f,c,f,c + mover)
-                                if self.verificar(f,c + mover,mosFin,color):
-                                    break
-                                c += mover
-                                m += 1
-                        if abs(rutas.get(i,5)) != 0:
-                            m = 1
-                            while m <= abs(rutas.get(i,5)):
-                                mover = 1
-                                if rutas.get(i,5) < 0:
-                                    mover = -1
-                                tmpMos.intercambiar(f,c,f + mover,c)
-                                if self.verificar(f + mover,c,mosFin,color):
-                                    break
-                                f += mover
-                                m += 1
-                        parar = True
-                        break
-                    y += 1
-                if parar:
-                    break
-                x += 1
-            i += 1
-        volteos = 0
-        i = 0
-        while i < fil:
-            j = 0
-            while j < col:
-                if tmpMos.get(i,j) != mosFin.get(i,j):
-                    volteos += 1
-                j += 1
-            i += 1
-        return volteos
-    
-    def minCost(self,intercambios,volteos,costInt,costVolt):
-        return intercambios * costInt + volteos * costVolt
-
     def transMos(self,fil,col,lenRutas,rutas,mosIni,mosFin,color,cInt,cVolt):
+        self.instrucciones = listaInst()
+        self.inicio = mosIni
+        self.costInt = cInt
+        self.costVolt = cVolt
+        self.intercambios = 0
+        self.volteos = 0
+        self.fil = fil
+        self.col = col
+        self.proConsola = 'Instrucciones\n'
+        self.proArchivo = 'Instrucciones\n'
         p = oFunc()
+        g = graficar()
+        self.proConsola += p.getMos(fil,col,mosIni)
+        self.proArchivo += p.getMosA(fil,col,mosIni)
         tmpMos = list_e_pc()
         i = 0
         while i < fil:
@@ -419,7 +302,7 @@ class pFunc:
                 j += 1
             i += 1
         i = 0
-        paso = 1
+        self.paso = 1
         while i < lenRutas:
             x = 0
             while x < fil:
@@ -431,40 +314,96 @@ class pFunc:
                     if x == rutas.get(i,0) and y == rutas.get(i,1):
                         f = x
                         c = y
-                        if abs(rutas.get(i,4)) != 0:
-                            m = 1
-                            while m <= abs(rutas.get(i,4)):
-                                mover = 0
-                                if rutas.get(i,4) < 0:
-                                    print(str(paso) + ')','Se intercambió. Costo: Q',cInt)
-                                    mover = -1
-                                else:
-                                    print(str(paso) + ')','Se intercambió. Costo: Q',cInt)
-                                    mover = 1
-                                tmpMos.intercambiar(f,c,f,c + mover)
-                                p.printMos(fil,col,tmpMos)
-                                paso += 1
-                                if self.verificar(f,c + mover,mosFin,color):
-                                    break
-                                c += mover
-                                m += 1
-                        if abs(rutas.get(i,5)) != 0:
-                            m = 1
-                            while m <= abs(rutas.get(i,5)):
-                                mover = 0
-                                if rutas.get(i,5) < 0:
-                                    print(str(paso) + ')','Se intercambió. Costo: Q',cInt)
-                                    mover = -1
-                                else:
-                                    print(str(paso) + ')','Se intercambió. Costo: Q',cInt)
-                                    mover = 1
-                                tmpMos.intercambiar(f,c,f + mover,c)
-                                p.printMos(fil,col,tmpMos)
-                                paso += 1
-                                if self.verificar(f + mover,c,mosFin,color):
-                                    break
-                                f += mover
-                                m += 1
+                        movT = abs(rutas.get(i,4)) + abs(rutas.get(i,5))
+                        if movT * cInt <= 2 * cVolt:
+                            if abs(rutas.get(i,4)) != 0:
+                                m = 1
+                                while m <= abs(rutas.get(i,4)):
+                                    mover = 0
+                                    descIns = str(self.paso) + ') Intercambio. Costo: Q ' + str(cInt) + '\n'
+                                    if rutas.get(i,4) < 0:
+                                        mover = -1
+                                    else:
+                                        mover = 1
+                                    detalle = "   En la Fila " + str(f + 1) + ", intercambiar Columna " + str(c + 1) + " con Columna " + str(c + mover + 1) + "\n"
+                                    self.proConsola += descIns + detalle
+                                    self.proArchivo += descIns + detalle
+                                    tmpMos.intercambiar(f,c,f,c + mover)
+                                    self.proConsola += p.getMos(fil,col,tmpMos)
+                                    self.proArchivo += p.getMosA(fil,col,tmpMos)
+                                    modoti = g.dibujar(fil,col,tmpMos)
+                                    modoti = g.getDot(modoti,'')
+                                    g.exportPNG(self.paso,modoti)
+                                    instruccion = inst(self.paso,descIns,detalle)
+                                    self.instrucciones.insertar(instruccion)
+                                    self.intercambios += 1
+                                    self.paso += 1
+                                    if self.verificar(f,c + mover,mosFin,color):
+                                        break
+                                    c += mover
+                                    m += 1
+                            if abs(rutas.get(i,5)) != 0:
+                                m = 1
+                                while m <= abs(rutas.get(i,5)):
+                                    mover = 0
+                                    descIns = str(self.paso) + ') Intercambio. Costo: Q ' + str(cInt) + '\n'
+                                    if rutas.get(i,5) < 0:
+                                        mover = -1
+                                    else:
+                                        mover = 1
+                                    detalle = "   En la Columna " + str(c + 1) + ", intercambiar Fila " + str(f + 1) + " con Filas " + str(f + mover + 1) + "\n"
+                                    self.proConsola += descIns + detalle
+                                    self.proArchivo += descIns + detalle
+                                    tmpMos.intercambiar(f,c,f + mover,c)
+                                    self.proConsola += p.getMos(fil,col,tmpMos)
+                                    self.proArchivo += p.getMosA(fil,col,tmpMos)
+                                    modoti = g.dibujar(fil,col,tmpMos)
+                                    modoti = g.getDot(modoti,'')
+                                    g.exportPNG(self.paso,modoti)
+                                    instruccion = inst(self.paso,descIns,detalle)
+                                    self.instrucciones.insertar(instruccion)
+                                    self.intercambios += 1
+                                    self.paso += 1
+                                    if self.verificar(f + mover,c,mosFin,color):
+                                        break
+                                    f += mover
+                                    m += 1
+                        else:
+                            descIns = str(self.paso) + ') Volteo. Costo: Q ' + str(cVolt) + '\n'
+                            detalle = ''
+                            if tmpMos.get(rutas.get(i,0),rutas.get(i,1)) == 'B':
+                                detalle = "   En Fila " + str(rutas.get(i,0) + 1) + " Columna " + str(rutas.get(i,1) + 1) + " voltear de Negro a Blanco\n"
+                            else:
+                                detalle = "   En Fila " + str(rutas.get(i,0) + 1) + " Columna " + str(rutas.get(i,1) + 1) + " voltear de Blanco a Negro\n"
+                            self.proConsola += descIns + detalle
+                            self.proArchivo += descIns + detalle
+                            tmpMos.voltear(rutas.get(i,0),rutas.get(i,1))
+                            self.proConsola += p.getMos(fil,col,tmpMos)
+                            self.proArchivo += p.getMosA(fil,col,tmpMos)
+                            modoti = g.dibujar(fil,col,tmpMos)
+                            modoti = g.getDot(modoti,'')
+                            g.exportPNG(self.paso,modoti)
+                            instruccion = inst(self.paso,descIns,detalle)
+                            self.instrucciones.insertar(instruccion)
+                            self.paso += 1
+                            descIns = str(self.paso) + ') Volteo. Costo: Q ' + str(cVolt) + '\n'
+                            detalle = ''
+                            if tmpMos.get(rutas.get(i,2),rutas.get(i,3)) == 'B':
+                                detalle = "   En Fila " + str(rutas.get(i,2) + 1) + " Columna " + str(rutas.get(i,3) + 1) + " voltear de Negro a Blanco\n"
+                            else:
+                                detalle = "   En Fila " + str(rutas.get(i,2) + 1) + " Columna " + str(rutas.get(i,3) + 1) + " voltear de Blanco a Negro\n"
+                            self.proConsola += descIns + detalle
+                            self.proArchivo += descIns + detalle
+                            tmpMos.voltear(rutas.get(i,2),rutas.get(i,3))
+                            self.proConsola += p.getMos(fil,col,tmpMos)
+                            self.proArchivo += p.getMosA(fil,col,tmpMos)
+                            modoti = g.dibujar(fil,col,tmpMos)
+                            modoti = g.getDot(modoti,'')
+                            g.exportPNG(self.paso,modoti)
+                            instruccion = inst(self.paso,descIns,detalle)
+                            self.instrucciones.insertar(instruccion)
+                            self.paso += 1
+                            self.volteos += 2
                         parar = True
                         break
                     y += 1
@@ -477,8 +416,43 @@ class pFunc:
             j = 0
             while j < col:
                 if tmpMos.get(i,j) != mosFin.get(i,j):
-                    print(str(paso) + ')','Se volteó. Costo: Q',cVolt)
+                    descIns = str(self.paso) + ') Volteo. Costo: Q ' + str(cVolt) + '\n'
+                    detalle = ''
+                    if tmpMos.get(i,j) == 'B':
+                        detalle = "   En Fila " + str(i + 1) + " Columna " + str(j + 1) + " voltear de Negro a Blanco\n"
+                    else:
+                        detalle = "   En Fila " + str(i + 1) + " Columna " + str(j + 1) + " voltear de Blanco a Negro\n"                   
+                    self.proConsola += descIns + detalle
+                    self.proArchivo += descIns + detalle
                     tmpMos.voltear(i,j)
-                    p.printMos(fil,col,tmpMos)
+                    self.proConsola += p.getMos(fil,col,tmpMos)
+                    self.proArchivo += p.getMosA(fil,col,tmpMos)
+                    modoti = g.dibujar(fil,col,tmpMos)
+                    modoti = g.getDot(modoti,'')
+                    g.exportPNG(self.paso,modoti)
+                    instruccion = inst(self.paso,descIns,detalle)
+                    self.instrucciones.insertar(instruccion)
+                    self.paso += 1
+                    self.volteos += 1
                 j += 1
             i += 1
+        self.proConsola += 'Costo Mínimo Total: Q ' + str(self.minCost())
+        self.proArchivo += 'Costo Mínimo Total: Q ' + str(self.minCost())
+
+    def minCost(self):
+        return self.intercambios * self.costInt + self.volteos * self.costVolt
+    
+    def getVolteos(self):
+        return self.volteos
+    
+    def getIntercambios(self):
+        return self.intercambios
+    
+    def getInstConsola(self):
+        return self.proConsola
+    
+    def getInstArchivo(self):
+        return self.proArchivo
+
+    def getListaInst(self):
+        return self.instrucciones

@@ -54,7 +54,6 @@ class list_e_pc:
                 segundo = actual2
                 break
             actual2 = actual2.siguiente
-        
         primero.patron_C.i = i2
         primero.patron_C.j = j2
         segundo.patron_C.i = i1

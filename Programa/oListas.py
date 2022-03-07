@@ -1,3 +1,9 @@
+class inst:
+    def __init__(self,i,instruccion,detalles):
+        self.i = i
+        self.instruccion = instruccion
+        self.detalles = detalles
+
 class cant1:
     def __init__(self,i,cantC):
         self.i = i
@@ -13,6 +19,33 @@ class nodo:
     def __init__(self,objeto = None,siguiente = None):
         self.objeto = objeto
         self.siguiente = siguiente
+
+class listaInst:
+    def __init__(self):
+        self.primero = None
+    
+    def insertar(self,inst):
+        if self.primero is None:
+            self.primero = nodo(objeto = inst)
+            return
+        actual = self.primero
+        while actual.siguiente:
+            actual = actual.siguiente
+        actual.siguiente = nodo(objeto = inst)
+    
+    def getInst(self,i):
+        actual = self.primero
+        while actual:
+            if actual.objeto.i == i:
+                return actual.objeto.instruccion
+            actual = actual.siguiente
+    
+    def getDetalles(self,i):
+        actual = self.primero
+        while actual:
+            if actual.objeto.i == i:
+                return actual.objeto.detalles
+            actual = actual.siguiente
 
 class listaCant1:
     def __init__(self):
@@ -78,7 +111,6 @@ class listaCant2:
                 primero = actual1
                 break
             actual1 = actual1.siguiente
-        
         actual2 = self.primero
         segundo = None
         while actual2:
@@ -86,7 +118,6 @@ class listaCant2:
                 segundo = actual2
                 break
             actual2 = actual2.siguiente
-
         primero.objeto.i = i1
         primero.objeto.j = j1
         segundo.objeto.i = i0
